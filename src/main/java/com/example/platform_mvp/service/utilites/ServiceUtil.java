@@ -1,21 +1,42 @@
 package com.example.platform_mvp.service.utilites;
 
+import com.example.platform_mvp.dto.service.AddServiceRequest;
+import com.example.platform_mvp.dto.service.ServiceResponse;
 import com.example.platform_mvp.dto.service.TypesOfServiceResponse;
+import com.example.platform_mvp.entities.Service;
 import com.example.platform_mvp.entities.enums.TypeOfService;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static com.example.platform_mvp.entities.enums.TypeOfService.*;
 
-@Service
+@Component
 public class ServiceUtil {
 
     public TypesOfServiceResponse getAllTypesOfServices() {
         TypesOfServiceResponse response = new TypesOfServiceResponse();
         response.setDescription(fillMap());
         return response;
+    }
+
+    public Service getServiceFromRequest(AddServiceRequest request) {
+        Service service = new Service();
+        service.setServiceTitle(request.getServiceTitle());
+        service.setMaxPrice(request.getMaxPrice());
+        service.setMinPrice(request.getMinPrice());
+        service.setTypeOfService(request.getTypeOfService());
+        return service;
+    }
+
+    public ServiceResponse convertToResponse(Service service) {
+        return ServiceResponse.builder()
+                .serviceTitle(service.getServiceTitle())
+                .maxPrice(service.getMaxPrice())
+                .minPrice(service.getMinPrice())
+                .typeOfService(service.getTypeOfService())
+                .build();
     }
 
     private Map<TypeOfService, String> fillMap() {

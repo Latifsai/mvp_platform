@@ -8,7 +8,8 @@ import java.math.BigDecimal;
 
 @Value
 @Builder
-public class AddAndUpdateServiceRequest {
+public class UpdateServiceRequest {
+    Long id;
     String serviceTitle;
     BigDecimal maxPrice;
     BigDecimal minPrice;
