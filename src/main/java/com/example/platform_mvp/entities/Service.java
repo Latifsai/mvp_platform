@@ -1,5 +1,6 @@
 package com.example.platform_mvp.entities;
 
+import com.example.platform_mvp.entities.enums.TypeOfService;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,4 +29,8 @@ public class Service {
 
     @Column(name = "min_price")
     private BigDecimal minPrice;
+
+    @Column(name = "type_of_service")
+    @Enumerated(EnumType.STRING)
+    private TypeOfService typeOfService;
 }
