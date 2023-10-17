@@ -53,6 +53,7 @@ public class ServiceUtil {
         return service;
     }
 
+    //remake this method
     public List<Service> getAllServicesWithSuitableSum(List<Service> services, BigDecimal price) {
         BigDecimal changer = BigDecimal.valueOf(500L);
         List<Service> list = new ArrayList<>();
