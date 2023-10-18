@@ -4,7 +4,6 @@ import com.example.platform_mvp.dto.service.AddServiceRequest;
 import com.example.platform_mvp.dto.service.ServiceResponse;
 import com.example.platform_mvp.dto.service.TypesOfServiceResponse;
 import com.example.platform_mvp.dto.service.UpdateServiceRequest;
-import com.example.platform_mvp.entities.enums.TypeOfService;
 import com.example.platform_mvp.service.imp.ServiceInterfaceImp;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -47,14 +46,14 @@ public class ServiceController {
 
     @GetMapping("/type/{type}")
     @ResponseStatus(HttpStatus.FOUND)
-    public List<ServiceResponse> findByTypeOfService(@PathVariable(name = "type") TypeOfService type) {
+    public List<ServiceResponse> findByTypeOfService(@PathVariable(name = "type") String type) {
         return service.findServicesByServiceType(type);
     }
 
     @GetMapping("/optimal/{type}/{price}")
     @ResponseStatus(HttpStatus.FOUND)
     public List<ServiceResponse> findByPriceAndTypeOfService(@PathVariable(name = "price") BigDecimal price,
-                                                     @PathVariable(name = "type") TypeOfService type) {
+                                                     @PathVariable(name = "type") String type) {
         return service.findServicesByBelongsPriceAndType(price, type);
     }
 

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static com.example.platform_mvp.entities.enums.TypeOfService.*;
 
@@ -20,9 +21,9 @@ import static com.example.platform_mvp.entities.enums.TypeOfService.*;
 public class ServiceUtil {
 
     public TypesOfServiceResponse getAllTypesOfServices() {
-        TypesOfServiceResponse response = new TypesOfServiceResponse();
-        response.setDescription(fillMap());
-        return response;
+        return TypesOfServiceResponse.builder()
+                .description(fillMap())
+                .build();
     }
 
     public Service getServiceFromRequest(AddServiceRequest request) {
@@ -54,26 +55,20 @@ public class ServiceUtil {
     }
 
     //remake this method
-    public List<Service> getAllServicesWithSuitableSum(List<Service> services, BigDecimal price) {
+    public List<Service> getAllServicesWithSuitableSum(List<Service> services, BigDecimal price, String type) {
         BigDecimal changer = BigDecimal.valueOf(500L);
         List<Service> list = new ArrayList<>();
 
-        for (Service s : services) {
-            if ((s.getMaxPrice().equals(price) || price.compareTo(s.getMaxPrice()) > 0)
-                    || (s.getMinPrice().equals(price) || price.compareTo(s.getMinPrice()) > 0)) {
+        List<Service> sortedServices = services.stream()
+                .filter(service -> service.getTypeOfService().toString().equals(type))
+                .toList();
+
+        for (Service s : sortedServices) {
+            if ((price.compareTo(s.getMaxPrice()) >= 0 || price.compareTo(s.getMinPrice()) >= 0)
+                    || (s.getMaxPrice().compareTo(price.subtract(changer)) <= 0 || s.getMinPrice().compareTo(price.subtract(changer)) <= 0)
+                    || (s.getMinPrice().compareTo(price.add(changer)) <= 0 || s.getMaxPrice().compareTo(price.add(changer)) <= 0)) {
                 list.add(s);
             }
-
-            if ((s.getMaxPrice().compareTo(price.subtract(changer)) < 0 || s.getMaxPrice().equals(price.subtract(changer)))
-            || (s.getMinPrice().compareTo(price.subtract(changer)) < 0 || s.getMinPrice().equals(price.subtract(changer)))) {
-                list.add(s);
-            }
-
-            if ((s.getMaxPrice().compareTo(price.add(changer)) < 0 || s.getMaxPrice().equals(price.add(changer)))
-                    || (s.getMinPrice().compareTo(price.add(changer)) < 0 || s.getMinPrice().equals(price.add(changer)))) {
-                list.add(s);
-            }
-
         }
         return list;
     }
@@ -95,4 +90,11 @@ public class ServiceUtil {
         map.put(Medical_and_sanatorium, "Medical and Sanatorium services");
         return map;
     }
+
+    public List<String> getEnumsValue() {
+        return fillMap().keySet().stream()
+                .map(Enum::toString)
+                .collect(Collectors.toList());
+    }
+
 }

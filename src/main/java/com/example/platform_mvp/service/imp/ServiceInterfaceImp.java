@@ -61,20 +61,19 @@ public class ServiceInterfaceImp implements ServiceInterface {
     }
 
     @Override
-    public List<ServiceResponse> findServicesByServiceType(TypeOfService typeOfService) {
-        return repository.findAllByTypeOfService(typeOfService).stream()
+    public List<ServiceResponse> findServicesByServiceType(String typeOfService) {
+        return repository.findAllByTypeOfService(checkType(typeOfService)).stream()
                 .map(util::convertToResponse)
                 .toList();
     }
 
     @Override
-    public List<ServiceResponse> findServicesByBelongsPriceAndType(BigDecimal price, TypeOfService typeOfService) {
+    public List<ServiceResponse> findServicesByBelongsPriceAndType(BigDecimal price, String typeOfService) {
         List<Service> services = repository.findAll();
-        return util.getAllServicesWithSuitableSum(services, price).stream()
+        return util.getAllServicesWithSuitableSum(services, price, typeOfService).stream()
                 .map(util::convertToResponse)
                 .toList();
     }
-
 
     @Override
     public TypesOfServiceResponse getAllTypesOfResponse() {
@@ -86,4 +85,12 @@ public class ServiceInterfaceImp implements ServiceInterface {
                 .orElseThrow(() -> new NotFoundException(String.format(ExceptionMessage.NOT_FOUND_SERVICE_MESSAGE, id)));
     }
 
+    private TypeOfService checkType(String type) {
+        if (util.getEnumsValue().contains(type)) {
+            return Enum.valueOf(TypeOfService.class, type);
+        }
+        throw new NotFoundException(String.format(ExceptionMessage.DOES_NOT_EXIST_TYPE_MESSAGE, type));
+    }
+
 }
+

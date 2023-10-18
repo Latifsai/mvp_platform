@@ -25,7 +25,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<?> handleConstrainViolationExpedition(NotFoundException e) {
-        List<ExceptionEntity> exceptionEntities = List.of(new ExceptionEntity(e.getCause() + "" + e.getMessage()));
-        return new ResponseEntity<>(new ExceptionResponse(exceptionEntities), HttpStatus.BAD_REQUEST);
+        List<ExceptionEntity> exceptionEntities = List.of(new ExceptionEntity(e.getMessage()));
+        return new ResponseEntity<>(new ExceptionResponse(exceptionEntities), HttpStatus.NOT_FOUND);
     }
 }
