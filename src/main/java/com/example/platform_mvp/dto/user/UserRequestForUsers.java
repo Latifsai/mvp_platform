@@ -1,10 +1,9 @@
 package com.example.platform_mvp.dto.user;
 
-import com.example.platform_mvp.entities.Service;
+import com.example.platform_mvp.dto.service.ServiceResponse;
 import com.example.platform_mvp.entities.enums.Reputation;
 import lombok.Builder;
 import lombok.Value;
-import org.hibernate.sql.ast.tree.from.StandardTableGroup;
 
 import java.util.List;
 
@@ -18,5 +17,5 @@ public class UserRequestForUsers {
     Integer experience;
     String informationAboutUser;
     Reputation reputation;
-    List<?> services; // remake to
+    List<ServiceResponse> services;
 }

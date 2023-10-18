@@ -175,12 +175,12 @@ class ServiceInterfaceImpTest {
     void findServicesByServiceType() {
         String type = "IT";
 
-        when(util.getEnumsValue()).thenReturn(Collections.singletonList(type));
+        when(util.getTypesValue()).thenReturn(Collections.singletonList(type));
         when(repository.findAllByTypeOfService(TypeOfService.IT)).thenReturn(Collections.singletonList(service));
         when(util.convertToResponse(service)).thenReturn(response);
 
         assertEquals(Collections.singletonList(response), serviceImp.findServicesByServiceType(type));
-        verify(util, times(1)).getEnumsValue();
+        verify(util, times(1)).getTypesValue();
         verify(repository, times(1)).findAllByTypeOfService(TypeOfService.IT);
         verify(util, times(1)).convertToResponse(service);
     }

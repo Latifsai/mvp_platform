@@ -32,6 +32,9 @@ public class User {
     @Column(name = "first_name")
     private String firstName;
 
+    @Column(name = "password")
+    private String password;
+
     @Column(name = "surname")
     private String surname;
 

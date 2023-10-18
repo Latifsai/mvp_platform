@@ -29,7 +29,8 @@ public class ServiceInterfaceImp implements ServiceInterface {
 
     @Override
     public ServiceResponse addService(AddServiceRequest request) {
-        Service service = util.getServiceFromRequest(request);
+        Service service = util.getServiceFromRequest(request.getServiceTitle(), request.getMaxPrice(),
+                request.getMinPrice(), request.getTypeOfService());
         repository.save(service);
         return util.convertToResponse(service);
     }
@@ -37,7 +38,9 @@ public class ServiceInterfaceImp implements ServiceInterface {
     @Override
     public ServiceResponse updateService(UpdateServiceRequest request) {
         Service service = findByID(request.getId());
-        Service updatedService = util.updateService(service, request);
+        Service updatedService = util.updateService(service, request.getServiceTitle(), request.getMaxPrice(),
+                request.getMinPrice(), request.getTypeOfService());
+
         repository.save(updatedService);
         return util.convertToResponse(updatedService);
     }
@@ -80,13 +83,29 @@ public class ServiceInterfaceImp implements ServiceInterface {
         return util.getAllTypesOfServices();
     }
 
+    public Service saveService(String title, BigDecimal maxPrice, BigDecimal minPrice, TypeOfService type) {
+        Service service = util.getServiceFromRequest(title, maxPrice, minPrice, type);
+        return repository.save(service);
+    }
+
+    public Service findByTitle(List<Service> services, String title) {
+        return services.stream()
+                .filter(service -> service.getServiceTitle().equals(title))
+                .findAny()
+                .orElseThrow(() -> new NotFoundException(String.format(ExceptionMessage.NOT_FOUND_SERVICE_MESSAGE, title)));
+    }
+
+    public void saveService(Service service) {
+        repository.save(service);
+    }
+
     private Service findByID(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new NotFoundException(String.format(ExceptionMessage.NOT_FOUND_SERVICE_MESSAGE, id)));
     }
 
     private TypeOfService checkType(String type) {
-        if (util.getEnumsValue().contains(type)) {
+        if (util.getTypesValue().contains(type)) {
             return Enum.valueOf(TypeOfService.class, type);
         }
         throw new NotFoundException(String.format(ExceptionMessage.DOES_NOT_EXIST_TYPE_MESSAGE, type));

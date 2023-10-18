@@ -1,6 +1,5 @@
 package com.example.platform_mvp.service.utilites;
 
-import com.example.platform_mvp.dto.service.AddServiceRequest;
 import com.example.platform_mvp.dto.service.ServiceResponse;
 import com.example.platform_mvp.dto.service.TypesOfServiceResponse;
 import com.example.platform_mvp.dto.service.UpdateServiceRequest;
@@ -26,12 +25,12 @@ public class ServiceUtil {
                 .build();
     }
 
-    public Service getServiceFromRequest(AddServiceRequest request) {
+    public Service getServiceFromRequest(String title, BigDecimal maxPrice,BigDecimal minPrice,TypeOfService type) {
         Service service = new Service();
-        service.setServiceTitle(request.getServiceTitle());
-        service.setMaxPrice(request.getMaxPrice());
-        service.setMinPrice(request.getMinPrice());
-        service.setTypeOfService(request.getTypeOfService());
+        service.setServiceTitle(title);
+        service.setMaxPrice(maxPrice);
+        service.setMinPrice(minPrice);
+        service.setTypeOfService(type);
         return service;
     }
 
@@ -44,17 +43,14 @@ public class ServiceUtil {
                 .build();
     }
 
-    public Service updateService(Service service, UpdateServiceRequest request) {
-        if (!request.getServiceTitle().isBlank()) service.setServiceTitle(request.getServiceTitle());
-        if (request.getMaxPrice() != null || !request.getMaxPrice().equals(BigDecimal.ZERO))
-            service.setMaxPrice(request.getMaxPrice());
-        if (request.getMinPrice() != null || !request.getMinPrice().equals(BigDecimal.ZERO))
-            service.setMinPrice(request.getMinPrice());
-        if (request.getTypeOfService() != null) service.setTypeOfService(request.getTypeOfService());
+    public Service updateService(Service service, String serviceTitle, BigDecimal maxPrice, BigDecimal minPrice, TypeOfService type) {
+        if (!serviceTitle.isBlank()) service.setServiceTitle(serviceTitle);
+        if (maxPrice != null || !maxPrice.equals(BigDecimal.ZERO)) service.setMaxPrice(maxPrice);
+        if (minPrice != null || !minPrice.equals(BigDecimal.ZERO)) service.setMinPrice(minPrice);
+        if (type != null) service.setTypeOfService(type);
         return service;
     }
 
-    //remake this method
     public List<Service> getAllServicesWithSuitableSum(List<Service> services, BigDecimal price, String type) {
         BigDecimal changer = BigDecimal.valueOf(500L);
         List<Service> list = new ArrayList<>();
@@ -91,7 +87,7 @@ public class ServiceUtil {
         return map;
     }
 
-    public List<String> getEnumsValue() {
+    public List<String> getTypesValue() {
         return fillMap().keySet().stream()
                 .map(Enum::toString)
                 .collect(Collectors.toList());
