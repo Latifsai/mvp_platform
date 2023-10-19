@@ -12,6 +12,8 @@ import java.math.BigDecimal;
 @Value
 @AllArgsConstructor
 public class AddServiceRequest {
+    @NotBlank(message = "username must not be blank!")
+    String username;
     @NotBlank(message = "serviceTitle must not be blank!")
     String serviceTitle;
     @Positive(message = "maxPrice must not be 0 or less")

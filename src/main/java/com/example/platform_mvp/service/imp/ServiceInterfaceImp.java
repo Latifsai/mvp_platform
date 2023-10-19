@@ -5,6 +5,7 @@ import com.example.platform_mvp.dto.service.ServiceResponse;
 import com.example.platform_mvp.dto.service.TypesOfServiceResponse;
 import com.example.platform_mvp.dto.service.UpdateServiceRequest;
 import com.example.platform_mvp.entities.Service;
+import com.example.platform_mvp.entities.User;
 import com.example.platform_mvp.entities.enums.TypeOfService;
 import com.example.platform_mvp.repository.ServiceRepository;
 import com.example.platform_mvp.service.ServiceInterface;
@@ -27,10 +28,14 @@ public class ServiceInterfaceImp implements ServiceInterface {
 
     private final ServiceRepository repository;
 
+
     @Override
-    public ServiceResponse addService(AddServiceRequest request) {
+    public ServiceResponse addService(AddServiceRequest request, User user) {
         Service service = util.getServiceFromRequest(request.getServiceTitle(), request.getMaxPrice(),
                 request.getMinPrice(), request.getTypeOfService());
+
+        user.getServices().add(service);
+        service.setUser(user);
         repository.save(service);
         return util.convertToResponse(service);
     }
@@ -95,6 +100,12 @@ public class ServiceInterfaceImp implements ServiceInterface {
                 .orElseThrow(() -> new NotFoundException(String.format(ExceptionMessage.NOT_FOUND_SERVICE_MESSAGE, title)));
     }
 
+    public List<ServiceResponse> getAllServicesBelongsUser(User user) {
+        return repository.findAllByUser(user).stream()
+                .map(util::convertToResponse)
+                .toList();
+    }
+
     public void addServiceToUser(Service service) {
         repository.save(service);
     }
@@ -110,6 +121,8 @@ public class ServiceInterfaceImp implements ServiceInterface {
         }
         throw new NotFoundException(String.format(ExceptionMessage.DOES_NOT_EXIST_TYPE_MESSAGE, type));
     }
+
+
 
 }
 

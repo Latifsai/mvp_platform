@@ -1,10 +1,12 @@
 package com.example.platform_mvp.controller;
 
-import com.example.platform_mvp.dto.user.RegistrationUserRequest;
+import com.example.platform_mvp.dto.service.AddServiceRequest;
+import com.example.platform_mvp.dto.service.ServiceResponse;
 import com.example.platform_mvp.dto.user.UpdateUserRequest;
 import com.example.platform_mvp.dto.user.UserRequestForUsers;
 import com.example.platform_mvp.entities.enums.Reputation;
 import com.example.platform_mvp.service.imp.UserServiceImp;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,10 +20,16 @@ public class UserController {
 
     private final UserServiceImp service;
 
-    @PostMapping
+    @PostMapping("/new_service")
     @ResponseStatus(HttpStatus.CREATED)
-    public UserRequestForUsers register(@RequestBody RegistrationUserRequest request) {
-        return service.registrateUser(request);
+    public ServiceResponse register(@RequestBody AddServiceRequest request) {
+        return service.addNewServiceToUser(request);
+    }
+
+    @PostMapping()
+    @ResponseStatus(HttpStatus.CREATED)
+    public ServiceResponse add(@Valid @RequestBody AddServiceRequest request) {
+        return service.addNewServiceToUser(request);
     }
 
     @GetMapping("/skills/{skill}")
@@ -70,6 +78,12 @@ public class UserController {
         return service.findAllUsers();
     }
 
+    @GetMapping("/services_user/{username}")
+    @ResponseStatus(HttpStatus.FOUND)
+    public List<ServiceResponse> getAllServicesBelongsUser(@PathVariable(name = "username") String username) {
+        return service.getAllServicesBelongsUser(username);
+    }
+
     @PutMapping
     @ResponseStatus(HttpStatus.CREATED)
     public UserRequestForUsers update(@RequestBody UpdateUserRequest request) {
@@ -81,4 +95,7 @@ public class UserController {
     public void delete(@PathVariable(name = "username") String username) {
         service.deleteUserByUserName(username);
     }
+
+
+
 }

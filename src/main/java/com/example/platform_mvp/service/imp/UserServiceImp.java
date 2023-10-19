@@ -1,5 +1,7 @@
 package com.example.platform_mvp.service.imp;
 
+import com.example.platform_mvp.dto.service.AddServiceRequest;
+import com.example.platform_mvp.dto.service.ServiceResponse;
 import com.example.platform_mvp.dto.user.RegistrationUserRequest;
 import com.example.platform_mvp.dto.user.UpdateUserRequest;
 import com.example.platform_mvp.dto.user.UserRequestForUsers;
@@ -35,14 +37,13 @@ public class UserServiceImp implements UserService {
         User user = util.createUserFromRequest(request, repository.findAll());
         Service service = serviceInterface.addServiceToUser(request.getServiceTitle(), request.getMaxPriceOfService(),
                 request.getMinPriceOfService(), request.getTypeOfService());
+        service.setUser(user);
         user.setServices(List.of(service));
-
         repository.save(user);
         return util.convertToResponse(user, serviceUtil);
     }
 
     /**
-     *
      * @param service is a TypeService(enum)
      * @return response of all founded users by service
      */
@@ -60,8 +61,7 @@ public class UserServiceImp implements UserService {
     }
 
     /**
-     *
-     * @param service is a TypeService(enum)
+     * @param service    is a TypeService(enum)
      * @param experience is years of work
      * @return response of all founded users by service and years
      */
@@ -76,8 +76,7 @@ public class UserServiceImp implements UserService {
     }
 
     /**
-     *
-     * @param service is a TypeService(enum)
+     * @param service    is a TypeService(enum)
      * @param reputation is the Reputation(enum)
      * @return response of all users which have so skills and reputation
      */
@@ -91,7 +90,6 @@ public class UserServiceImp implements UserService {
     }
 
     /**
-     *
      * @param firmaTitle is name of Firma
      * @return response of all users which have firma name
      */
@@ -104,9 +102,8 @@ public class UserServiceImp implements UserService {
     }
 
     /**
-     *
      * @param serviceTitle is title of service which user have
-     * @param experience is years of work
+     * @param experience   is years of work
      * @return response of all users which have such serviceTitle and experience
      */
 
@@ -119,9 +116,8 @@ public class UserServiceImp implements UserService {
     }
 
     /**
-     *
      * @param serviceTitle is experience
-     * @param reputation reputation(enum)
+     * @param reputation   reputation(enum)
      * @return response of all users which have such serviceTitle and reputation
      */
 
@@ -142,9 +138,7 @@ public class UserServiceImp implements UserService {
 
     @Override
     public UserRequestForUsers updateUser(UpdateUserRequest request) {
-        User user = repository.findByUsername(request.getUsername())
-                .orElseThrow(() -> new NotFoundException(String.format(ExceptionMessage.NOT_FOUND_USER_MESSAGE, request.getUsername())));
-
+        User user = findByUsername(request.getUsername());
 
         User updatedUser = util.updateUser(user, request);
         if (util.checkCriteria(request.getNewServiceTitle())) {
@@ -163,12 +157,26 @@ public class UserServiceImp implements UserService {
 
     @Override
     public void deleteUserByUserName(String username) {
-        User user = repository.findByUsername(username)
-                .orElseThrow(() -> new NotFoundException(String.format(ExceptionMessage.NOT_FOUND_USER_MESSAGE, username)));
+        User user = findByUsername(username);
         repository.delete(user);
     }
 
-    private List<User> filterUsersByService(List<User> users, String service) {
+    public ServiceResponse addNewServiceToUser(AddServiceRequest request) {
+        User user = findByUsername(request.getUsername());
+        return serviceInterface.addService(request, user);
+    }
+
+    public List<ServiceResponse> getAllServicesBelongsUser(String username) {
+        User user = findByUsername(username);
+        return serviceInterface.getAllServicesBelongsUser(user);
+    }
+
+    public User findByUsername(String username) {
+        return repository.findByUsername(username)
+                .orElseThrow(() -> new NotFoundException(String.format(ExceptionMessage.NOT_FOUND_USER_MESSAGE, username)));
+    }
+
+ private List<User> filterUsersByService(List<User> users, String service) {
         return users.stream()
                 .filter(user -> user.getServices().stream()
                         .anyMatch(ser -> ser.getTypeOfService().toString().equals(service)))

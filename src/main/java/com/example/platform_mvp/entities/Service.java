@@ -11,7 +11,6 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-@ToString
 @Getter
 @Setter
 public class Service {
@@ -38,4 +37,14 @@ public class Service {
     @JoinColumn(columnDefinition = "user_id", referencedColumnName = "id")
     private User user;
 
+    @Override
+    public String toString() {
+        return "Service{" +
+                "id=" + id +
+                ", serviceTitle='" + serviceTitle + '\'' +
+                ", maxPrice=" + maxPrice +
+                ", minPrice=" + minPrice +
+                ", typeOfService=" + typeOfService +
+                '}';
+    }
 }

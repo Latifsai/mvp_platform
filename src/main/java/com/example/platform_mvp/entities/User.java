@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 import static jakarta.persistence.CascadeType.*;
@@ -54,8 +55,8 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Reputation reputation;
 
-    @OneToMany(mappedBy = "user", cascade = {PERSIST, REMOVE, REFRESH}, fetch = FetchType.LAZY)
-    private List<Service> services;
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = {REFRESH, PERSIST, REMOVE})
+    private SearchNeed searchNeed;
 
     @Override
     public String toString() {
@@ -63,26 +64,31 @@ public class User {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", firstName='" + firstName + '\'' +
+                ", password='" + password + '\'' +
                 ", surname='" + surname + '\'' +
                 ", firmaTitle='" + firmaTitle + '\'' +
                 ", experience=" + experience +
                 ", informationAboutUser='" + informationAboutUser + '\'' +
                 ", credits=" + credits +
                 ", reputation=" + reputation +
+                ", searchNeed=" + searchNeed +
                 ", services=" + services +
                 '}';
     }
+
+    @OneToMany(mappedBy = "user", cascade = {PERSIST, REMOVE, REFRESH}, fetch = FetchType.LAZY)
+    private List<Service> services;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(firmaTitle, user.firmaTitle) && Objects.equals(experience, user.experience) && Objects.equals(informationAboutUser, user.informationAboutUser) && Objects.equals(credits, user.credits) && Objects.equals(services, user.services);
+        return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(firstName, user.firstName) && Objects.equals(password, user.password) && Objects.equals(surname, user.surname) && Objects.equals(firmaTitle, user.firmaTitle) && Objects.equals(experience, user.experience) && Objects.equals(informationAboutUser, user.informationAboutUser) && Objects.equals(credits, user.credits) && reputation == user.reputation && Objects.equals(searchNeed, user.searchNeed) && Objects.equals(services, user.services);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, firmaTitle, experience, informationAboutUser, credits, services);
+        return Objects.hash(id, username, firstName, password, surname, firmaTitle, experience, informationAboutUser, credits, reputation, searchNeed, services);
     }
 }

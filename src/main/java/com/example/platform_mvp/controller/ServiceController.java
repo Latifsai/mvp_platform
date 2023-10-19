@@ -1,11 +1,9 @@
 package com.example.platform_mvp.controller;
 
-import com.example.platform_mvp.dto.service.AddServiceRequest;
 import com.example.platform_mvp.dto.service.ServiceResponse;
 import com.example.platform_mvp.dto.service.TypesOfServiceResponse;
 import com.example.platform_mvp.dto.service.UpdateServiceRequest;
 import com.example.platform_mvp.service.imp.ServiceInterfaceImp;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -19,12 +17,6 @@ import java.util.List;
 public class ServiceController {
 
     private final ServiceInterfaceImp service;
-
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public ServiceResponse add(@Valid @RequestBody AddServiceRequest request) {
-        return service.addService(request);
-    }
 
     @PutMapping
     @ResponseStatus(HttpStatus.CREATED)
