@@ -33,13 +33,13 @@ import static org.mockito.Mockito.*;
 class ServiceInterfaceImpTest {
 
     @Mock
-    ServiceUtil util;
+    private ServiceUtil util;
 
     @Mock
-    ServiceRepository repository;
+    private ServiceRepository repository;
 
     @InjectMocks
-    ServiceInterfaceImp serviceImp;
+    private ServiceInterfaceImp serviceImp;
 
     private final Service service = EntityGenerator.getService();
     private final ServiceResponse response = DTOGenerator.getServiceResponse();
@@ -49,12 +49,12 @@ class ServiceInterfaceImpTest {
     void addService() {
         AddServiceRequest request = new AddServiceRequest("title", BigDecimal.TEN, BigDecimal.ONE, TypeOfService.IT);
 
-        when(util.getServiceFromRequest(request)).thenReturn(service);
+        when(util.getServiceFromRequest(request.getServiceTitle(), request.getMaxPrice(), request.getMinPrice(), request.getTypeOfService())).thenReturn(service);
         when(repository.save(service)).thenReturn(service);
         when(util.convertToResponse(service)).thenReturn(response);
 
         assertEquals(response, serviceImp.addService(request));
-        verify(util, times(1)).getServiceFromRequest(request);
+        verify(util, times(1)).getServiceFromRequest(request.getServiceTitle(), request.getMaxPrice(), request.getMinPrice(), request.getTypeOfService());
         verify(repository, times(1)).save(service);
         verify(util, times(1)).convertToResponse(service);
     }
@@ -85,13 +85,13 @@ class ServiceInterfaceImpTest {
         service.setMinPrice(BigDecimal.TEN);
         service.setMaxPrice(BigDecimal.ZERO);
 
-        when(util.updateService(service, request)).thenReturn(service);
+        when(util.updateService(service, request.getServiceTitle(), request.getMaxPrice(), request.getMinPrice(), request.getTypeOfService())).thenReturn(service);
         when(repository.save(service)).thenReturn(service);
         when(util.convertToResponse(service)).thenReturn(response);
 
         assertEquals(response, serviceImp.updateService(request));
         verify(repository, times(1)).findById(request.getId());
-        verify(util, times(1)).updateService(service, request);
+        verify(util, times(1)).updateService(service, request.getServiceTitle(), request.getMaxPrice(), request.getMinPrice(), request.getTypeOfService());
         verify(repository, times(1)).save(service);
         verify(util, times(1)).convertToResponse(service);
     }

@@ -105,7 +105,7 @@ public class UserServiceImp implements UserService {
 
         User updatedUser = util.updateUser(user,request);
         if (util.checkCriteria(request.getServiceTitle())){
-            user.setJobTitle(request.getServiceTitle());
+            user.setFirmaTitle(request.getServiceTitle());
             Service service = serviceInterface.findByTitle(updatedUser.getServices(), request.getServiceTitle());
 
             if (updatedUser.getServices().contains(service)) {
@@ -114,7 +114,6 @@ public class UserServiceImp implements UserService {
                         serviceInterface.saveService(updatedService);
             }
         }
-
         repository.save(updatedUser);
         return util.convertToResponse(updatedUser, serviceUtil);
     }

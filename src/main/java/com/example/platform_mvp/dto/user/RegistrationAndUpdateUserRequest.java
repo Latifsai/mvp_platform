@@ -17,6 +17,7 @@ public class RegistrationAndUpdateUserRequest {
     String firstName;
     String surname;
     String password;
+    String firmaTitle;
     Integer experience;
     String userInfo;
     String serviceTitle;

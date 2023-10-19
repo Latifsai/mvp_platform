@@ -38,13 +38,13 @@ public class User {
     @Column(name = "surname")
     private String surname;
 
-    @Column(name = "job_title")
-    private String jobTitle;
+    @Column(name = "firma_title")
+    private String firmaTitle;
 
     @Column(name = "experience")
     private Integer experience;
 
-    @Column(name = "informationAboutUser")
+    @Column(name = "information_about_user")
     private String informationAboutUser;
 
     @Column(name = "credits")
@@ -65,7 +65,7 @@ public class User {
                 ", username='" + username + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", surname='" + surname + '\'' +
-                ", jobTitle='" + jobTitle + '\'' +
+                ", firmaTitle='" + firmaTitle + '\'' +
                 ", experience=" + experience +
                 ", informationAboutUser='" + informationAboutUser + '\'' +
                 ", credits=" + credits +
@@ -79,11 +79,11 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(jobTitle, user.jobTitle) && Objects.equals(experience, user.experience) && Objects.equals(informationAboutUser, user.informationAboutUser) && Objects.equals(credits, user.credits) && Objects.equals(services, user.services);
+        return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(firmaTitle, user.firmaTitle) && Objects.equals(experience, user.experience) && Objects.equals(informationAboutUser, user.informationAboutUser) && Objects.equals(credits, user.credits) && Objects.equals(services, user.services);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, jobTitle, experience, informationAboutUser, credits, services);
+        return Objects.hash(id, username, firmaTitle, experience, informationAboutUser, credits, services);
     }
 }

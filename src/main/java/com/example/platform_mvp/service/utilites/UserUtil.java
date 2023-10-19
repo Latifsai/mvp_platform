@@ -10,13 +10,10 @@ import com.example.platform_mvp.validation.exceptions.AlreadyExistException;
 import com.example.platform_mvp.validation.exceptions.FormatException;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static java.math.BigDecimal.ZERO;
 
 @Service
 public class UserUtil {
@@ -58,7 +55,7 @@ public class UserUtil {
         }
         user.setExperience(request.getExperience());
         user.setInformationAboutUser(request.getUserInfo());
-        user.setJobTitle(request.getServiceTitle());
+        user.setFirmaTitle(request.getFirmaTitle());
         setCreditsAndReputation(user, request);
         return user;
     }
@@ -94,7 +91,7 @@ public class UserUtil {
                 .username(user.getUsername())
                 .firstName(user.getFirstName())
                 .surname(user.getSurname())
-                .jobTitle(user.getJobTitle())
+                .firmaTitle(user.getFirmaTitle())
                 .experience(user.getExperience())
                 .informationAboutUser(user.getInformationAboutUser())
                 .reputation(user.getReputation())

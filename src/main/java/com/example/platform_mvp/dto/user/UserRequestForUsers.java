@@ -13,7 +13,7 @@ public class UserRequestForUsers {
     String username;
     String firstName;
     String surname;
-    String jobTitle;
+    String firmaTitle;
     Integer experience;
     String informationAboutUser;
     Reputation reputation;
