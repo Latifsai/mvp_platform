@@ -1,13 +1,15 @@
 package com.example.platform_mvp.service.utilites;
 
 import com.example.platform_mvp.dto.service.ServiceResponse;
-import com.example.platform_mvp.dto.user.RegistrationAndUpdateUserRequest;
+import com.example.platform_mvp.dto.user.RegistrationUserRequest;
+import com.example.platform_mvp.dto.user.UpdateUserRequest;
 import com.example.platform_mvp.dto.user.UserRequestForUsers;
 import com.example.platform_mvp.entities.User;
 import com.example.platform_mvp.entities.enums.Reputation;
 import com.example.platform_mvp.validation.ExceptionMessage;
 import com.example.platform_mvp.validation.exceptions.AlreadyExistException;
 import com.example.platform_mvp.validation.exceptions.FormatException;
+import com.example.platform_mvp.validation.exceptions.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,20 +20,20 @@ import java.util.regex.Pattern;
 @Service
 public class UserUtil {
 
-    private final String usernameFormat = "^[A-Za-z]{5,20}[0-9]{2,5}$";
+    private final String usernameFormat = "^[A-Za-z]{3,20}[0-9]{2,5}$";
     private final String passwordFormat = "^[0-9]{6,20}[A-Za-z]{3,6}$";
 
     private Matcher matcher;
 
 
-    public User createUserFromRequest(RegistrationAndUpdateUserRequest request, List<User> allUsers) {
+    public User createUserFromRequest(RegistrationUserRequest request, List<User> allUsers) {
         User user = new User();
 
         List<String> usernames = allUsers.stream()
                 .map(User::getUsername)
                 .toList();
 
-        if (usernames.contains(request.getUsername())) {
+        if (!usernames.contains(request.getUsername())) {
             checkField(usernameFormat, request.getUsername());
 
             if (matcher.find()) {
@@ -60,7 +62,7 @@ public class UserUtil {
         return user;
     }
 
-    private void setCreditsAndReputation(User user, RegistrationAndUpdateUserRequest request) {
+    private void setCreditsAndReputation(User user, RegistrationUserRequest request) {
         int years = request.getExperience();
         if (years >= 10) {
             user.setCredits(100);
@@ -105,27 +107,50 @@ public class UserUtil {
 
         for (User user : allUsers) {
             if (user.getExperience() >= years || user.getExperience() >= years + changer
-            || user.getExperience() >= years - changer) {
-                   users.add(user);
+                    || user.getExperience() >= years - changer) {
+                users.add(user);
             }
         }
         return users;
     }
 
-    public User updateUser(User user, RegistrationAndUpdateUserRequest request) {
+    public User updateUser(User user, UpdateUserRequest request) {
         if (checkCriteria(request.getUsername())) user.setUsername(request.getUsername());
-        if (checkCriteria(request.getFirstName())) user.setUsername(request.getFirstName());
-        if (checkCriteria(request.getSurname())) user.setUsername(request.getSurname());
+        if (checkCriteria(request.getFirstName())) user.setFirstName(request.getFirstName());
+        if (checkCriteria(request.getSurname())) user.setSurname(request.getSurname());
 
         checkField(passwordFormat, request.getPassword());
-        if (checkCriteria(request.getPassword()) && matcher.find()) user.setUsername(request.getPassword());
+        if (checkCriteria(request.getPassword()) && matcher.find()) user.setPassword(request.getPassword());
         if (checkCriteria(request.getUserInfo())) user.setInformationAboutUser(request.getUserInfo());
+
+
 
         if (request.getExperience() > 0 && request.getExperience() != null) user.setExperience(request.getExperience());
         return user;
     }
 
+    public List<User> findAllUsersWhichServiceTitleContainsCriteria(List<User> users, String serviceTitle) {
+        String firstWord = checkStringTitle(serviceTitle);
+        return users.stream()
+                .filter(user -> user.getServices().stream()
+                        .allMatch(service -> service.getServiceTitle().toLowerCase().contains(firstWord.toLowerCase())))
+                .toList();
+    }
+
     public boolean checkCriteria(String criteria) {
-        return !criteria.isBlank();
+        return criteria != null && !criteria.trim().isEmpty();
+    }
+
+    private String checkStringTitle(String title) {
+        return title.contains(" ")
+                ? title.substring(0, title.indexOf(" "))
+                : title;
+    }
+
+    public void checkOldServiceName(String oldName, List<com.example.platform_mvp.entities.Service> services) {
+        services.stream()
+                .map(service -> service.getServiceTitle().equalsIgnoreCase(oldName))
+                .findAny()
+                .orElseThrow(() ->  new NotFoundException(String.format(ExceptionMessage.NOT_FOUND_SERVICE_MESSAGE, oldName)));
     }
 }

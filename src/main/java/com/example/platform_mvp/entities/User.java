@@ -22,40 +22,39 @@ import static jakarta.persistence.CascadeType.*;
 public class User {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(name = "username")
+    @Column(name = "username", nullable = false)
     private String username;
 
-    @Column(name = "first_name")
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "surname")
+    @Column(name = "surname", nullable = false)
     private String surname;
 
-    @Column(name = "firma_title")
+    @Column(name = "firma_title", nullable = false)
     private String firmaTitle;
 
-    @Column(name = "experience")
+    @Column(name = "experience", nullable = false)
     private Integer experience;
 
-    @Column(name = "information_about_user")
+    @Column(name = "information_about_user", nullable = false)
     private String informationAboutUser;
 
-    @Column(name = "credits")
+    @Column(name = "credits", nullable = false)
     private Integer credits;
 
-    @Column(name = "reputation")
+    @Column(name = "reputation", nullable = false)
     @Enumerated(EnumType.STRING)
     private Reputation reputation;
 
-    @Column(name = "services")
-    @ManyToMany(cascade = {PERSIST, PERSIST, REMOVE}, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", cascade = {PERSIST, REMOVE, REFRESH}, fetch = FetchType.LAZY)
     private List<Service> services;
 
     @Override

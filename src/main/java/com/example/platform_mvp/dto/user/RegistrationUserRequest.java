@@ -1,10 +1,6 @@
 package com.example.platform_mvp.dto.user;
 
 import com.example.platform_mvp.entities.enums.TypeOfService;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Builder;
 import lombok.Value;
 
@@ -12,7 +8,7 @@ import java.math.BigDecimal;
 
 @Value
 @Builder
-public class RegistrationAndUpdateUserRequest {
+public class RegistrationUserRequest {
     String username;
     String firstName;
     String surname;

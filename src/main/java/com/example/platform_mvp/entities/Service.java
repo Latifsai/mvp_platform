@@ -17,20 +17,25 @@ import java.math.BigDecimal;
 public class Service {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "service_title")
+    @Column(name = "service_title", nullable = false)
     private String serviceTitle;
 
-    @Column(name = "max_price")
+    @Column(name = "max_price", nullable = false)
     private BigDecimal maxPrice;
 
-    @Column(name = "min_price")
+    @Column(name = "min_price", nullable = false)
     private BigDecimal minPrice;
 
-    @Column(name = "type_of_service")
+    @Column(name = "type_of_service", nullable = false)
     @Enumerated(EnumType.STRING)
     private TypeOfService typeOfService;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH})
+    @JoinColumn(columnDefinition = "user_id", referencedColumnName = "id")
+    private User user;
+
 }

@@ -11,8 +11,7 @@ import java.util.UUID;
 public interface UserRepository extends JpaRepository<User, UUID> {
 
     List<User> findAllByReputation(Reputation reputation);
-    List<User> findAllByJobTitle(String jobTitle);
-    List<User> findAllByJobTitleAndExperience(String jobTitle, Integer experience);
-    List<User> findAllByJobTitleAndReputation(String jobTitle, Reputation reputation);
+    List<User> findAllByFirmaTitle(String firmaTitle);
+    List<User> findAllByExperience(Integer experience);
     Optional<User> findByUsername(String username);
 }

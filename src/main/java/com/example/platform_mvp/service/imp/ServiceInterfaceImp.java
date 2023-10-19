@@ -83,7 +83,7 @@ public class ServiceInterfaceImp implements ServiceInterface {
         return util.getAllTypesOfServices();
     }
 
-    public Service saveService(String title, BigDecimal maxPrice, BigDecimal minPrice, TypeOfService type) {
+    public Service addServiceToUser(String title, BigDecimal maxPrice, BigDecimal minPrice, TypeOfService type) {
         Service service = util.getServiceFromRequest(title, maxPrice, minPrice, type);
         return repository.save(service);
     }
@@ -95,7 +95,7 @@ public class ServiceInterfaceImp implements ServiceInterface {
                 .orElseThrow(() -> new NotFoundException(String.format(ExceptionMessage.NOT_FOUND_SERVICE_MESSAGE, title)));
     }
 
-    public void saveService(Service service) {
+    public void addServiceToUser(Service service) {
         repository.save(service);
     }
 

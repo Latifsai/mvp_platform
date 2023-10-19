@@ -1,6 +1,7 @@
 package com.example.platform_mvp.service.imp;
 
-import com.example.platform_mvp.dto.user.RegistrationAndUpdateUserRequest;
+import com.example.platform_mvp.dto.user.RegistrationUserRequest;
+import com.example.platform_mvp.dto.user.UpdateUserRequest;
 import com.example.platform_mvp.dto.user.UserRequestForUsers;
 import com.example.platform_mvp.entities.Service;
 import com.example.platform_mvp.entities.User;
@@ -30,9 +31,9 @@ public class UserServiceImp implements UserService {
     private final ServiceUtil serviceUtil;
 
     @Override
-    public UserRequestForUsers registrateUser(RegistrationAndUpdateUserRequest request) {
+    public UserRequestForUsers registrateUser(RegistrationUserRequest request) {
         User user = util.createUserFromRequest(request, repository.findAll());
-        Service service = serviceInterface.saveService(request.getServiceTitle(), request.getMaxPriceOfService(),
+        Service service = serviceInterface.addServiceToUser(request.getServiceTitle(), request.getMaxPriceOfService(),
                 request.getMinPriceOfService(), request.getTypeOfService());
         user.setServices(List.of(service));
 
@@ -40,6 +41,11 @@ public class UserServiceImp implements UserService {
         return util.convertToResponse(user, serviceUtil);
     }
 
+    /**
+     *
+     * @param service is a TypeService(enum)
+     * @return response of all founded users by service
+     */
     @Override
     public List<UserRequestForUsers> findUsersBySkill(String service) {
         List<String> allTypesOfServices = serviceUtil.getTypesValue();
@@ -53,6 +59,13 @@ public class UserServiceImp implements UserService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     *
+     * @param service is a TypeService(enum)
+     * @param experience is years of work
+     * @return response of all founded users by service and years
+     */
+
     @Override
     public List<UserRequestForUsers> findUsersBySkillAndExperience(String service, Integer experience) {
         List<User> users = util.filterUserByExperience(repository.findAll(), experience);
@@ -62,6 +75,13 @@ public class UserServiceImp implements UserService {
                 .toList();
     }
 
+    /**
+     *
+     * @param service is a TypeService(enum)
+     * @param reputation is the Reputation(enum)
+     * @return response of all users which have so skills and reputation
+     */
+
     @Override
     public List<UserRequestForUsers> findUsersBySkillAndReputation(String service, Reputation reputation) {
         List<User> filteredByReputationUsers = repository.findAllByReputation(reputation);
@@ -70,23 +90,45 @@ public class UserServiceImp implements UserService {
                 .toList();
     }
 
+    /**
+     *
+     * @param firmaTitle is name of Firma
+     * @return response of all users which have firma name
+     */
+
     @Override
-    public List<UserRequestForUsers> findUsersByJobTitle(String jobTitle) {
-        return repository.findAllByJobTitle(jobTitle).stream()
+    public List<UserRequestForUsers> findUsersByFirmaTitle(String firmaTitle) {
+        return repository.findAllByFirmaTitle(firmaTitle).stream()
                 .map(user -> util.convertToResponse(user, serviceUtil))
                 .toList();
     }
 
+    /**
+     *
+     * @param serviceTitle is title of service which user have
+     * @param experience is years of work
+     * @return response of all users which have such serviceTitle and experience
+     */
+
     @Override
-    public List<UserRequestForUsers> findUsersByJobTitleAndExperience(String jobTitle, Integer experience) {
-        return repository.findAllByJobTitleAndExperience(jobTitle, experience).stream()
+    public List<UserRequestForUsers> findUsersByServiceTitleAndExperience(String serviceTitle, Integer experience) {
+        List<User> userByExperience = util.filterUserByExperience(repository.findAll(), experience);
+        return filterUsersByService(userByExperience, serviceTitle).stream()
                 .map(user -> util.convertToResponse(user, serviceUtil))
                 .toList();
     }
 
+    /**
+     *
+     * @param serviceTitle is experience
+     * @param reputation reputation(enum)
+     * @return response of all users which have such serviceTitle and reputation
+     */
+
     @Override
-    public List<UserRequestForUsers> findUsersByJobTitleAndReputation(String jobTitle, Reputation reputation) {
-        return repository.findAllByJobTitleAndReputation(jobTitle, reputation).stream()
+    public List<UserRequestForUsers> findUsersByServiceTitleAndReputation(String serviceTitle, Reputation reputation) {
+        List<User> filtererByReputation = repository.findAllByReputation(reputation);
+        return util.findAllUsersWhichServiceTitleContainsCriteria(filtererByReputation, serviceTitle).stream()
                 .map(user -> util.convertToResponse(user, serviceUtil))
                 .toList();
     }
@@ -99,19 +141,20 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public UserRequestForUsers updateUser(RegistrationAndUpdateUserRequest request) {
+    public UserRequestForUsers updateUser(UpdateUserRequest request) {
         User user = repository.findByUsername(request.getUsername())
                 .orElseThrow(() -> new NotFoundException(String.format(ExceptionMessage.NOT_FOUND_USER_MESSAGE, request.getUsername())));
 
-        User updatedUser = util.updateUser(user,request);
-        if (util.checkCriteria(request.getServiceTitle())){
-            user.setFirmaTitle(request.getServiceTitle());
-            Service service = serviceInterface.findByTitle(updatedUser.getServices(), request.getServiceTitle());
+
+        User updatedUser = util.updateUser(user, request);
+        if (util.checkCriteria(request.getNewServiceTitle())) {
+            util.checkOldServiceName(request.getOldServiceTitle(), user.getServices());
+            Service service = serviceInterface.findByTitle(user.getServices(), request.getOldServiceTitle());
 
             if (updatedUser.getServices().contains(service)) {
-                 Service updatedService =  serviceUtil.updateService(service, request.getServiceTitle(), request.getMaxPriceOfService(),
+                Service updatedService = serviceUtil.updateService(service, request.getNewServiceTitle(), request.getMaxPriceOfService(),
                         request.getMinPriceOfService(), request.getTypeOfService());
-                        serviceInterface.saveService(updatedService);
+                serviceInterface.addServiceToUser(updatedService);
             }
         }
         repository.save(updatedUser);
@@ -131,4 +174,5 @@ public class UserServiceImp implements UserService {
                         .anyMatch(ser -> ser.getTypeOfService().toString().equals(service)))
                 .toList();
     }
+
 }
