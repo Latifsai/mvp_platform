@@ -13,6 +13,7 @@ import com.example.platform_mvp.validation.ExceptionMessage;
 import com.example.platform_mvp.validation.exceptions.AlreadyExistException;
 import com.example.platform_mvp.validation.exceptions.FormatException;
 import com.example.platform_mvp.validation.exceptions.NotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -31,7 +32,7 @@ public class UserUtil {
     private final Random random = new SecureRandom();
     private Matcher matcher;
 
-    public User createUserFromRequest(RegistrationUserRequest request, List<User> allUsers) {
+    public User createUserFromRequest(RegistrationUserRequest request, List<User> allUsers, PasswordEncoder encoder) {
         User user = new User();
 
         List<String> usernames = allUsers.stream()
@@ -57,7 +58,7 @@ public class UserUtil {
         checkField(passwordFormat, request.getPassword());
 
         if (matcher.find()) {
-            user.setPassword(request.getPassword());
+            user.setPassword(encoder.encode(request.getPassword()));
         } else {
             throw new FormatException(String.format(ExceptionMessage.INCORRECT_PASSWORD_FORMAT_MESSAGE, request.getPassword()));
         }

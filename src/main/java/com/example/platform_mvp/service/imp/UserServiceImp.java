@@ -17,6 +17,7 @@ import com.example.platform_mvp.service.utilites.UserUtil;
 import com.example.platform_mvp.validation.ExceptionMessage;
 import com.example.platform_mvp.validation.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -36,15 +37,17 @@ public class UserServiceImp implements UserService {
 
     private final SearchNeedService searchNeedService;
 
+    private final PasswordEncoder passwordEncoder;
+
     @Override
     public UserResponseForUsers registrateUser(RegistrationUserRequest request) {
-        User user = util.createUserFromRequest(request, repository.findAll());
+        User user = util.createUserFromRequest(request, repository.findAll(), passwordEncoder);
         repository.save(user);
 
         Service service = serviceInterface.addServiceToUser(request.getServiceTitle(), request.getMaxPriceOfService(),
                 request.getMinPriceOfService(), request.getTypeOfService(), user);
 
-        SearchNeed need = searchNeedService.addNeedsToUser(request.getLabels(), request.getPrice(), request.getExperience(),
+        SearchNeed need = searchNeedService.addNeedsToUser(request.getLabels(), request.getPrice(), request.getExperienceOfUserToFind(),
                 request.getReputation(), user);
 
         user.setServices(List.of(service));

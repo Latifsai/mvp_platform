@@ -9,17 +9,23 @@ import com.example.platform_mvp.service.utilites.generator.GeneratorMap;
 import com.example.platform_mvp.validation.ExceptionMessage;
 import com.example.platform_mvp.validation.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class SearchUtil {
+
+    public boolean checkSearchNeed(SearchNeed need) {
+        return (need.getSearchLabels() != null && !need.getSearchLabels().trim().isEmpty()) &&
+                (need.getExperience() != null && need.getExperience() != 0) &&
+                (need.getPrice() != null && !need.getPrice().equals(BigDecimal.ZERO))  &&
+                (need.getReputation() != null);
+    }
 
     public List<User> filterByReputation(List<User> suitableUsers, Reputation reputation) {
         return suitableUsers.stream()
@@ -87,18 +93,18 @@ public class SearchUtil {
     }
 
     public List<TypeOfService> getValues(String labels) {
-        Map<String, List<TypeOfService>> map = getLabelsWithValues();
-        boolean containLabel = map.keySet().stream()
-                .anyMatch(s -> s.contains(labels));
+        assert labels != null;
+        Map<String, List<TypeOfService>> map = GeneratorMap.getLabelsForUser();
+        log.info(map.toString());
 
+        boolean containLabel = map.keySet().stream()
+                .filter(Objects::nonNull)
+                .anyMatch(str -> str.contains(labels));
+        log.info("containLabel" + containLabel);
         if (containLabel) {
             return map.get(labels);
         }
 
         throw new NotFoundException(String.format(ExceptionMessage.INCORRECT_LABEL_MESSAGE, labels));
-    }
-
-    private Map<String, List<TypeOfService>> getLabelsWithValues() {
-        return GeneratorMap.getLabelsForUser();
     }
 }

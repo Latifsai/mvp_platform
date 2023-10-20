@@ -40,12 +40,13 @@ public class SearchSuitableUsersService {
         List<User> suitableUsers = new ArrayList<>();
 
         for (User user : allUsers) {
-            if (user.getSearchNeed() != null) {
+            if (user.getSearchNeed() != null && util.checkSearchNeed(user.getSearchNeed())) {
                 List<SearchNeed> needs = new ArrayList<>();
                 needs.add(user.getSearchNeed());
 
                 for (SearchNeed need : needs) {
                     List<TypeOfService> typesOfEveryUser = util.getValues(need.getSearchLabels());
+                    log.info("Type of user" + typesOfEveryUser.toString());
 
                     if (need.getSearchLabels() != null && !need.getSearchLabels().trim().isEmpty()) {
                         suitableUsers = util.getSuitableUsers(typesOfEveryUser, allUsers, suitableUsers, user);
