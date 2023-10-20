@@ -27,12 +27,6 @@ public class UserController {
         return service.addNewServiceToUser(request);
     }
 
-    @PostMapping()
-    @ResponseStatus(HttpStatus.CREATED)
-    public UserResponseForUsers add(@Valid @RequestBody RegistrationUserRequest request) {
-        return service.registrateUser(request);
-    }
-
     @GetMapping("/skills/{skill}")
     @ResponseStatus(HttpStatus.FOUND)
     public List<UserResponseForUsers> findBySkills(@PathVariable(name = "skill") String skill) {

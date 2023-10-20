@@ -32,11 +32,10 @@ public class SecurityConfiguration {
                 .cors(cors -> corsConfigurationSource())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/all/**").permitAll()
-                        .requestMatchers("/entered/**").hasAnyAuthority("ROLE_CLIENT", "ROLE_MANAGER")
-                        .requestMatchers("/payments/**").hasAnyAuthority("ROLE_CLIENT", "ROLE_MANAGER")
-                        .requestMatchers("/card").hasAuthority("ROLE_MANAGER")
+                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/api/register/**").permitAll()
+                        .requestMatchers("/api/users/**").hasAnyAuthority("ROLE_CLIENT", "ROLE_MANAGER")
+                        .requestMatchers("/api/services/**").hasAnyAuthority("ROLE_CLIENT", "ROLE_MANAGER")
                         .anyRequest().hasAnyAuthority("ROLE_MANAGER"))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
