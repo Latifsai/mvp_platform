@@ -12,8 +12,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -66,19 +68,22 @@ public class SearchUtil {
     }
 
     public List<User> getSuitableUsers(List<TypeOfService> typesOfEveryUser, List<User> allUsers, List<User> suitableUsers, User user) {
+        List<User> mutableSuitableUsers = new ArrayList<>(suitableUsers); // Создайте изменяемую копию suitableUsers
+
         for (TypeOfService type : typesOfEveryUser) {
-            User userToSave = allUsers.stream()
+            Optional<User> userToSave = allUsers.stream()
                     .filter(us -> us.getServices().stream()
                             .allMatch(service -> service.getTypeOfService().equals(type)))
-                    .findAny()
-                    .orElse(null);
+                    .findAny();
 
-            assert userToSave != null;
-            if (!user.getUsername().equals(userToSave.getUsername())) {
-                suitableUsers.add(userToSave);
-            }
+            userToSave.ifPresent(savedUser -> {
+                if (!user.getUsername().equals(savedUser.getUsername())) {
+                    mutableSuitableUsers.add(savedUser);
+                }
+            });
         }
-        return suitableUsers;
+        return mutableSuitableUsers;
+
     }
 
     public List<TypeOfService> getValues(String labels) {

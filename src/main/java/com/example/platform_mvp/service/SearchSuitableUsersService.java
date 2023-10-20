@@ -36,14 +36,11 @@ public class SearchSuitableUsersService {
     }
 
     public List<UserResponseForUsers> findSuitableUsers() {
-        // get all Users
         List<User> allUsers = userService.getAllUsers();
-        //get user needs
-        List<SearchNeed> needs = new ArrayList<>();
-
         List<User> suitableUsers = new ArrayList<>();
 
         for (User user : allUsers) {
+            List<SearchNeed> needs = new ArrayList<>();
             needs.add(user.getSearchNeed());
 
             for (SearchNeed need : needs) {
@@ -51,24 +48,22 @@ public class SearchSuitableUsersService {
 
                 if (need.getSearchLabels() != null && !need.getSearchLabels().trim().isEmpty()) {
                     suitableUsers = util.getSuitableUsers(typesOfEveryUser, allUsers, suitableUsers, user);
-                    log.info(": " + suitableUsers.toString());
+                    log.info("labels step: " + suitableUsers.toString());
                 }
 
-                if (need.getPrice() != null && need.getPrice().equals(BigDecimal.ZERO)) {
+                if (need.getPrice() != null && !need.getPrice().equals(BigDecimal.ZERO)) {
                     suitableUsers = util.filterByPrises(suitableUsers, need);
-                    log.info(suitableUsers.toString());
-
+                    log.info("price step: " + suitableUsers.toString());
                 }
 
-                if (need.getExperience() != null && need.getExperience() == 0) {
+                if (need.getExperience() != null && need.getExperience() != 0) {
                     suitableUsers = util.filterByExperience(suitableUsers, need);
-                    log.info(suitableUsers.toString());
-
+                    log.info("experience step: " + suitableUsers.toString());
                 }
 
                 if (need.getReputation() != null) {
                     suitableUsers = util.filterByReputation(suitableUsers, need.getReputation());
-                    log.info(suitableUsers.toString());
+                    log.info("reputation step: " + suitableUsers.toString());
                 }
             }
         }

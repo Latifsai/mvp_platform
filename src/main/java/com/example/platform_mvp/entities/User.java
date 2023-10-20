@@ -9,7 +9,6 @@ import lombok.Setter;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.UUID;
 
 import static jakarta.persistence.CascadeType.*;
@@ -84,11 +83,22 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(firstName, user.firstName) && Objects.equals(password, user.password) && Objects.equals(surname, user.surname) && Objects.equals(firmaTitle, user.firmaTitle) && Objects.equals(experience, user.experience) && Objects.equals(informationAboutUser, user.informationAboutUser) && Objects.equals(credits, user.credits) && reputation == user.reputation && Objects.equals(searchNeed, user.searchNeed) && Objects.equals(services, user.services);
+        return Objects.equals(id, user.id) && Objects.equals(username, user.username)
+                && Objects.equals(firstName, user.firstName)
+                && Objects.equals(password, user.password)
+                && Objects.equals(surname, user.surname)
+                && Objects.equals(firmaTitle, user.firmaTitle)
+                && Objects.equals(experience, user.experience)
+                && Objects.equals(informationAboutUser, user.informationAboutUser)
+                && Objects.equals(credits, user.credits)
+                && reputation == user.reputation
+                && Objects.equals(searchNeed, user.searchNeed)
+                && Objects.equals(services, user.services);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, firstName, password, surname, firmaTitle, experience, informationAboutUser, credits, reputation, searchNeed, services);
+        return Objects.hash(id, username, firstName, password, surname, firmaTitle, experience, informationAboutUser,
+                credits, reputation, searchNeed, services);
     }
 }
