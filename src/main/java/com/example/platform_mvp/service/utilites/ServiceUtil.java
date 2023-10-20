@@ -5,6 +5,7 @@ import com.example.platform_mvp.dto.service.TypesOfServiceResponse;
 import com.example.platform_mvp.dto.service.UpdateServiceRequest;
 import com.example.platform_mvp.entities.Service;
 import com.example.platform_mvp.entities.enums.TypeOfService;
+import com.example.platform_mvp.validation.ExceptionMessage;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -30,7 +31,12 @@ public class ServiceUtil {
         service.setServiceTitle(title);
         service.setMaxPrice(maxPrice);
         service.setMinPrice(minPrice);
-        service.setTypeOfService(type);
+
+        if (fillMap().containsKey(type)){
+            service.setTypeOfService(type);
+        } else {
+            throw new IllegalArgumentException(String.format(ExceptionMessage.DOES_NOT_EXIST_TYPE_MESSAGE, type, prepareTypeOutputIfNeed()));
+        }
         return service;
     }
 
@@ -93,4 +99,11 @@ public class ServiceUtil {
                 .collect(Collectors.toList());
     }
 
+    private String prepareTypeOutputIfNeed() {
+        StringBuilder result = new StringBuilder();
+        for (Map.Entry<TypeOfService, String> entry : fillMap().entrySet()) {
+            result.append(entry.getKey()).append(": ").append(entry.getValue()).append(", ");
+        }
+        return result.toString();
+    }
 }

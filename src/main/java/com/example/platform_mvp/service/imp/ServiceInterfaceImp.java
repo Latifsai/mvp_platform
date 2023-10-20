@@ -88,8 +88,9 @@ public class ServiceInterfaceImp implements ServiceInterface {
         return util.getAllTypesOfServices();
     }
 
-    public Service addServiceToUser(String title, BigDecimal maxPrice, BigDecimal minPrice, TypeOfService type) {
+    public Service addServiceToUser(String title, BigDecimal maxPrice, BigDecimal minPrice, TypeOfService type, User user) {
         Service service = util.getServiceFromRequest(title, maxPrice, minPrice, type);
+        service.setUser(user);
         return repository.save(service);
     }
 

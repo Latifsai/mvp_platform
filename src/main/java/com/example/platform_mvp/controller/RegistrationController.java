@@ -20,5 +20,4 @@ public class RegistrationController {
     public UserResponseForUsers registration(@Valid @RequestBody RegistrationUserRequest request) {
         return service.registrateUser(request);
     }
-
 }

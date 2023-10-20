@@ -1,8 +1,5 @@
 package com.example.platform_mvp.service;
 
-import com.example.platform_mvp.dto.searchNeed.AddNeedsRequest;
-import com.example.platform_mvp.dto.searchNeed.SearchNeedsResponse;
-import com.example.platform_mvp.dto.searchNeed.UpdateNeedsRequest;
 import com.example.platform_mvp.dto.user.UpdateUserRequest;
 import com.example.platform_mvp.entities.SearchNeed;
 import com.example.platform_mvp.entities.User;

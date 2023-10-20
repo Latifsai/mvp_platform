@@ -39,17 +39,18 @@ public class UserServiceImp implements UserService {
     @Override
     public UserResponseForUsers registrateUser(RegistrationUserRequest request) {
         User user = util.createUserFromRequest(request, repository.findAll());
+        repository.save(user);
+
         Service service = serviceInterface.addServiceToUser(request.getServiceTitle(), request.getMaxPriceOfService(),
-                request.getMinPriceOfService(), request.getTypeOfService());
+                request.getMinPriceOfService(), request.getTypeOfService(), user);
+
         SearchNeed need = searchNeedService.addNeedsToUser(request.getLabels(), request.getPrice(), request.getExperience(),
                 request.getReputation(), user);
 
-        service.setUser(user);
         user.setServices(List.of(service));
         user.setSearchNeed(need);
         need.setUser(user);
 
-        repository.save(user);
         return util.convertToResponse(user, serviceUtil);
     }
 
@@ -57,6 +58,7 @@ public class UserServiceImp implements UserService {
      * @param service is a TypeService(enum)
      * @return response of all founded users by service
      */
+
     @Override
     public List<UserResponseForUsers> findUsersBySkill(String service) {
         List<String> allTypesOfServices = serviceUtil.getTypesValue();

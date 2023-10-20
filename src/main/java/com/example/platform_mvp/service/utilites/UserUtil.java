@@ -7,6 +7,7 @@ import com.example.platform_mvp.dto.user.UserResponseForUsers;
 import com.example.platform_mvp.entities.SearchNeed;
 import com.example.platform_mvp.entities.User;
 import com.example.platform_mvp.entities.enums.Reputation;
+import com.example.platform_mvp.entities.enums.Role;
 import com.example.platform_mvp.service.utilites.generator.NumberGenerator;
 import com.example.platform_mvp.validation.ExceptionMessage;
 import com.example.platform_mvp.validation.exceptions.AlreadyExistException;
@@ -64,6 +65,7 @@ public class UserUtil {
         user.setInformationAboutUser(request.getUserInfo());
         user.setFirmaTitle(request.getFirmaTitle());
         setCreditsAndReputation(user, request);
+        user.setRole(Role.USER);
         return user;
     }
 

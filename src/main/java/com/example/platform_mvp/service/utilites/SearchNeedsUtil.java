@@ -22,13 +22,13 @@ public class SearchNeedsUtil {
         boolean match = getAllLabels().stream()
                 .anyMatch(label -> label.equalsIgnoreCase(labels));
 
-        if (match) {
-            searchNeed.setSearchLabels(labels);
-        } else {
-            throw new IllegalArgumentException(String.format(ExceptionMessage.INCORRECT_LABEL_MESSAGE,
-                    labels, getAllLabels().toString()));
+        if (labels != null && !labels.trim().isEmpty()) {
+            if (match) {
+                searchNeed.setSearchLabels(labels);
+            } else {
+                throw new IllegalArgumentException(String.format(ExceptionMessage.INCORRECT_LABEL_MESSAGE, labels, getAllLabels().toString()));
+            }
         }
-
         searchNeed.setPrice(price);
         searchNeed.setExperience(experience);
         searchNeed.setReputation(reputation);
