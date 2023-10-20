@@ -55,7 +55,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Reputation reputation;
 
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = {REFRESH, PERSIST, REMOVE})
+    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER, cascade = {REFRESH, PERSIST, REMOVE})
     private SearchNeed searchNeed;
 
     @Override
@@ -76,7 +76,7 @@ public class User {
                 '}';
     }
 
-    @OneToMany(mappedBy = "user", cascade = {PERSIST, REMOVE, REFRESH}, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", cascade = {PERSIST, REMOVE, REFRESH}, fetch = FetchType.EAGER)
     private List<Service> services;
 
     @Override

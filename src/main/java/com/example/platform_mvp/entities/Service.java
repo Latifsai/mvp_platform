@@ -33,7 +33,7 @@ public class Service {
     @Enumerated(EnumType.STRING)
     private TypeOfService typeOfService;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH})
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH})
     @JoinColumn(columnDefinition = "user_id", referencedColumnName = "id")
     private User user;
 

@@ -3,7 +3,7 @@ package com.example.platform_mvp.service.utilites;
 import com.example.platform_mvp.dto.service.ServiceResponse;
 import com.example.platform_mvp.dto.user.RegistrationUserRequest;
 import com.example.platform_mvp.dto.user.UpdateUserRequest;
-import com.example.platform_mvp.dto.user.UserRequestForUsers;
+import com.example.platform_mvp.dto.user.UserResponseForUsers;
 import com.example.platform_mvp.entities.User;
 import com.example.platform_mvp.entities.enums.Reputation;
 import com.example.platform_mvp.validation.ExceptionMessage;
@@ -84,12 +84,12 @@ public class UserUtil {
         matcher = pattern.matcher(field);
     }
 
-    public UserRequestForUsers convertToResponse(User user, ServiceUtil serviceUtil) {
+    public UserResponseForUsers convertToResponse(User user, ServiceUtil serviceUtil) {
         List<ServiceResponse> services = user.getServices().stream()
                 .map(serviceUtil::convertToResponse)
                 .toList();
 
-        return UserRequestForUsers.builder()
+        return UserResponseForUsers.builder()
                 .username(user.getUsername())
                 .firstName(user.getFirstName())
                 .surname(user.getSurname())

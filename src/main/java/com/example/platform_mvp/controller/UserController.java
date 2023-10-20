@@ -2,8 +2,9 @@ package com.example.platform_mvp.controller;
 
 import com.example.platform_mvp.dto.service.AddServiceRequest;
 import com.example.platform_mvp.dto.service.ServiceResponse;
+import com.example.platform_mvp.dto.user.RegistrationUserRequest;
 import com.example.platform_mvp.dto.user.UpdateUserRequest;
-import com.example.platform_mvp.dto.user.UserRequestForUsers;
+import com.example.platform_mvp.dto.user.UserResponseForUsers;
 import com.example.platform_mvp.entities.enums.Reputation;
 import com.example.platform_mvp.service.imp.UserServiceImp;
 import jakarta.validation.Valid;
@@ -22,59 +23,59 @@ public class UserController {
 
     @PostMapping("/new_service")
     @ResponseStatus(HttpStatus.CREATED)
-    public ServiceResponse register(@RequestBody AddServiceRequest request) {
+    public ServiceResponse add(@RequestBody AddServiceRequest request) {
         return service.addNewServiceToUser(request);
     }
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public ServiceResponse add(@Valid @RequestBody AddServiceRequest request) {
-        return service.addNewServiceToUser(request);
+    public UserResponseForUsers add(@Valid @RequestBody RegistrationUserRequest request) {
+        return service.registrateUser(request);
     }
 
     @GetMapping("/skills/{skill}")
     @ResponseStatus(HttpStatus.FOUND)
-    public List<UserRequestForUsers> findBySkills(@PathVariable(name = "skill") String skill) {
+    public List<UserResponseForUsers> findBySkills(@PathVariable(name = "skill") String skill) {
         return service.findUsersBySkill(skill);
     }
 
     @GetMapping("/skills_and_experience/{skill}/{experience}")
     @ResponseStatus(HttpStatus.FOUND)
-    public List<UserRequestForUsers> findBySkills(@PathVariable(name = "skill") String skill,
-                                                  @PathVariable(name = "experience") Integer experience) {
+    public List<UserResponseForUsers> findBySkills(@PathVariable(name = "skill") String skill,
+                                                   @PathVariable(name = "experience") Integer experience) {
         return service.findUsersBySkillAndExperience(skill, experience);
     }
 
     @GetMapping("/skills_and_reputation/{skill}/{reputation}")
     @ResponseStatus(HttpStatus.FOUND)
-    public List<UserRequestForUsers> findBySkillsAndReputation(@PathVariable(name = "skill") String skill,
-                                                               @PathVariable(name = "reputation") Reputation reputation) {
+    public List<UserResponseForUsers> findBySkillsAndReputation(@PathVariable(name = "skill") String skill,
+                                                                @PathVariable(name = "reputation") Reputation reputation) {
         return service.findUsersBySkillAndReputation(skill, reputation);
     }
 
     @GetMapping("/firma_title/{firmaTitle}")
     @ResponseStatus(HttpStatus.FOUND)
-    public List<UserRequestForUsers> findByJobTitle(@PathVariable(name = "firmaTitle") String firmaTitle) {
+    public List<UserResponseForUsers> findByJobTitle(@PathVariable(name = "firmaTitle") String firmaTitle) {
         return service.findUsersByFirmaTitle(firmaTitle);
     }
 
     @GetMapping("/service_title_and_experience/{serviceTitle}/{experience}")
     @ResponseStatus(HttpStatus.FOUND)
-    public List<UserRequestForUsers> findByServiceTitleAndExperience(@PathVariable(name = "serviceTitle") String serviceTitle,
-                                                                 @PathVariable(name = "experience") Integer experience) {
+    public List<UserResponseForUsers> findByServiceTitleAndExperience(@PathVariable(name = "serviceTitle") String serviceTitle,
+                                                                      @PathVariable(name = "experience") Integer experience) {
         return service.findUsersByServiceTitleAndExperience(serviceTitle, experience);
     }
 
     @GetMapping("/service_title_and_reputation/{serviceTitle}/{reputation}")
     @ResponseStatus(HttpStatus.FOUND)
-    public List<UserRequestForUsers> findByServiceTitleAndReputation(@PathVariable(name = "serviceTitle") String serviceTitle,
-                                                                     @PathVariable(name = "reputation") Reputation reputation) {
+    public List<UserResponseForUsers> findByServiceTitleAndReputation(@PathVariable(name = "serviceTitle") String serviceTitle,
+                                                                      @PathVariable(name = "reputation") Reputation reputation) {
         return service.findUsersByServiceTitleAndReputation(serviceTitle, reputation);
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.FOUND)
-    public List<UserRequestForUsers> findByAllUsers() {
+    public List<UserResponseForUsers> findByAllUsers() {
         return service.findAllUsers();
     }
 
@@ -86,7 +87,7 @@ public class UserController {
 
     @PutMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public UserRequestForUsers update(@RequestBody UpdateUserRequest request) {
+    public UserResponseForUsers update(@RequestBody UpdateUserRequest request) {
         return service.updateUser(request);
     }
 

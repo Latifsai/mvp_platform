@@ -40,7 +40,7 @@ public class SearchNeed {
     @Enumerated(EnumType.STRING)
     private Reputation reputation;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     private User user;
 
     @Override

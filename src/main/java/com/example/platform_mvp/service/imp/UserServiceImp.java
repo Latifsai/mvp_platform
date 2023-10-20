@@ -4,7 +4,7 @@ import com.example.platform_mvp.dto.service.AddServiceRequest;
 import com.example.platform_mvp.dto.service.ServiceResponse;
 import com.example.platform_mvp.dto.user.RegistrationUserRequest;
 import com.example.platform_mvp.dto.user.UpdateUserRequest;
-import com.example.platform_mvp.dto.user.UserRequestForUsers;
+import com.example.platform_mvp.dto.user.UserResponseForUsers;
 import com.example.platform_mvp.entities.Service;
 import com.example.platform_mvp.entities.User;
 import com.example.platform_mvp.entities.enums.Reputation;
@@ -33,7 +33,7 @@ public class UserServiceImp implements UserService {
     private final ServiceUtil serviceUtil;
 
     @Override
-    public UserRequestForUsers registrateUser(RegistrationUserRequest request) {
+    public UserResponseForUsers registrateUser(RegistrationUserRequest request) {
         User user = util.createUserFromRequest(request, repository.findAll());
         Service service = serviceInterface.addServiceToUser(request.getServiceTitle(), request.getMaxPriceOfService(),
                 request.getMinPriceOfService(), request.getTypeOfService());
@@ -48,7 +48,7 @@ public class UserServiceImp implements UserService {
      * @return response of all founded users by service
      */
     @Override
-    public List<UserRequestForUsers> findUsersBySkill(String service) {
+    public List<UserResponseForUsers> findUsersBySkill(String service) {
         List<String> allTypesOfServices = serviceUtil.getTypesValue();
         if (!allTypesOfServices.contains(service)) {
             throw new NotFoundException(String.format(ExceptionMessage.NOT_FOUND_SERVICE_MESSAGE, service));
@@ -67,7 +67,7 @@ public class UserServiceImp implements UserService {
      */
 
     @Override
-    public List<UserRequestForUsers> findUsersBySkillAndExperience(String service, Integer experience) {
+    public List<UserResponseForUsers> findUsersBySkillAndExperience(String service, Integer experience) {
         List<User> users = util.filterUserByExperience(repository.findAll(), experience);
         List<User> filteredUsers = filterUsersByService(users, service);
         return filteredUsers.stream()
@@ -82,7 +82,7 @@ public class UserServiceImp implements UserService {
      */
 
     @Override
-    public List<UserRequestForUsers> findUsersBySkillAndReputation(String service, Reputation reputation) {
+    public List<UserResponseForUsers> findUsersBySkillAndReputation(String service, Reputation reputation) {
         List<User> filteredByReputationUsers = repository.findAllByReputation(reputation);
         return filterUsersByService(filteredByReputationUsers, service).stream()
                 .map(user -> util.convertToResponse(user, serviceUtil))
@@ -95,7 +95,7 @@ public class UserServiceImp implements UserService {
      */
 
     @Override
-    public List<UserRequestForUsers> findUsersByFirmaTitle(String firmaTitle) {
+    public List<UserResponseForUsers> findUsersByFirmaTitle(String firmaTitle) {
         return repository.findAllByFirmaTitle(firmaTitle).stream()
                 .map(user -> util.convertToResponse(user, serviceUtil))
                 .toList();
@@ -108,7 +108,7 @@ public class UserServiceImp implements UserService {
      */
 
     @Override
-    public List<UserRequestForUsers> findUsersByServiceTitleAndExperience(String serviceTitle, Integer experience) {
+    public List<UserResponseForUsers> findUsersByServiceTitleAndExperience(String serviceTitle, Integer experience) {
         List<User> userByExperience = util.filterUserByExperience(repository.findAll(), experience);
         return filterUsersByService(userByExperience, serviceTitle).stream()
                 .map(user -> util.convertToResponse(user, serviceUtil))
@@ -122,7 +122,7 @@ public class UserServiceImp implements UserService {
      */
 
     @Override
-    public List<UserRequestForUsers> findUsersByServiceTitleAndReputation(String serviceTitle, Reputation reputation) {
+    public List<UserResponseForUsers> findUsersByServiceTitleAndReputation(String serviceTitle, Reputation reputation) {
         List<User> filtererByReputation = repository.findAllByReputation(reputation);
         return util.findAllUsersWhichServiceTitleContainsCriteria(filtererByReputation, serviceTitle).stream()
                 .map(user -> util.convertToResponse(user, serviceUtil))
@@ -130,14 +130,14 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public List<UserRequestForUsers> findAllUsers() {
+    public List<UserResponseForUsers> findAllUsers() {
         return repository.findAll().stream()
                 .map(user -> util.convertToResponse(user, serviceUtil))
                 .toList();
     }
 
     @Override
-    public UserRequestForUsers updateUser(UpdateUserRequest request) {
+    public UserResponseForUsers updateUser(UpdateUserRequest request) {
         User user = findByUsername(request.getUsername());
 
         User updatedUser = util.updateUser(user, request);
@@ -176,7 +176,11 @@ public class UserServiceImp implements UserService {
                 .orElseThrow(() -> new NotFoundException(String.format(ExceptionMessage.NOT_FOUND_USER_MESSAGE, username)));
     }
 
- private List<User> filterUsersByService(List<User> users, String service) {
+    public List<User> getAllUsers() {
+        return repository.findAll();
+    }
+
+    private List<User> filterUsersByService(List<User> users, String service) {
         return users.stream()
                 .filter(user -> user.getServices().stream()
                         .anyMatch(ser -> ser.getTypeOfService().toString().equals(service)))

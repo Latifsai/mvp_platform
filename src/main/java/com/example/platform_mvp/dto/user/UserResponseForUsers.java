@@ -9,7 +9,7 @@ import java.util.List;
 
 @Value
 @Builder
-public class UserRequestForUsers {
+public class UserResponseForUsers {
     String username;
     String firstName;
     String surname;

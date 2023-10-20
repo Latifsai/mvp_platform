@@ -4,17 +4,12 @@ import com.example.platform_mvp.dto.searchNeed.AddNeedsRequest;
 import com.example.platform_mvp.dto.searchNeed.SearchNeedsResponse;
 import com.example.platform_mvp.dto.searchNeed.UpdateNeedsRequest;
 import com.example.platform_mvp.entities.SearchNeed;
-import com.example.platform_mvp.entities.enums.TypeOfService;
+import com.example.platform_mvp.service.utilites.generator.Generator;
 import com.example.platform_mvp.validation.ExceptionMessage;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
-
-import static com.example.platform_mvp.entities.enums.TypeOfService.*;
 
 @Service
 public class SearchNeedsUtil {
@@ -22,14 +17,15 @@ public class SearchNeedsUtil {
     public SearchNeed createEntity(AddNeedsRequest request) {
         SearchNeed searchNeed = new SearchNeed();
 
-        for (String label: getAllLabels()) {
-            if (label.equalsIgnoreCase(request.getSearchLabels())) {
+        boolean match = getAllLabels().stream()
+                .anyMatch(label -> label.equalsIgnoreCase(request.getSearchLabels()));
+
+            if (match) {
                 searchNeed.setSearchLabels(request.getSearchLabels());
             }else {
                 throw new IllegalArgumentException(String.format(ExceptionMessage.INCORRECT_LABEL_MESSAGE,
-                        request.getSearchLabels(), getLabelsForUser().toString()));
+                        request.getSearchLabels(), getAllLabels().toString()));
             }
-        }
 
         searchNeed.setPrice(request.getPrice());
         searchNeed.setExperience(request.getExperience());
@@ -54,35 +50,8 @@ public class SearchNeedsUtil {
         return need;
     }
 
-    public Map<String, List<TypeOfService>> getLabelsForUser() {
-        Map<String, List<TypeOfService>> map = new HashMap<>();
-        map.put("#software", List.of(IT));
-        map.put("#it", List.of(IT));
-        map.put("#bank", List.of(Accounting, Financial, Accounting));
-        map.put("#money", List.of(Accounting, Financial, Accounting));
-        map.put("#rules", List.of(Legal));
-        map.put("#attorney", List.of(Legal));
-        map.put("#house", List.of(Housing_and_communal, Construction));
-        map.put("#finance", List.of(Accounting, Financial, Accounting));
-        map.put("#kurs",  List.of(Educational));
-        map.put("#education", List.of(Educational));
-        map.put("#delivery", List.of(Delivery));
-        map.put("#logistic", List.of(Delivery));
-        map.put("#protect", List.of(Security));
-        map.put("#savety", List.of(Security));
-        map.put("#security", List.of(Security));
-        map.put("#fly",  List.of(Tourist));
-        map.put("#holiday", List.of(Tourist));
-        map.put("#regeneration", List.of(Entertainment_and_recreation, Medical_and_sanatorium));
-        map.put("#rest", List.of(Entertainment_and_recreation, Medical_and_sanatorium));
-        map.put("#healt", List.of(Entertainment_and_recreation, Medical_and_sanatorium));
-        map.put("#medizine", List.of(Entertainment_and_recreation, Medical_and_sanatorium));
-        map.put("#beauty",  List.of(Cosmetic));
-        map.put("#nails", List.of(Cosmetic));
-        return map;
-    }
 
     public Set<String> getAllLabels() {
-        return getLabelsForUser().keySet();
+        return Generator.getLabelsForUser().keySet();
     }
 }
