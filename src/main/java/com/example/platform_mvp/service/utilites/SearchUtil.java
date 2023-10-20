@@ -5,7 +5,7 @@ import com.example.platform_mvp.entities.Service;
 import com.example.platform_mvp.entities.User;
 import com.example.platform_mvp.entities.enums.Reputation;
 import com.example.platform_mvp.entities.enums.TypeOfService;
-import com.example.platform_mvp.service.utilites.generator.Generator;
+import com.example.platform_mvp.service.utilites.generator.GeneratorMap;
 import com.example.platform_mvp.validation.ExceptionMessage;
 import com.example.platform_mvp.validation.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -99,6 +99,6 @@ public class SearchUtil {
     }
 
     private Map<String, List<TypeOfService>> getLabelsWithValues() {
-        return Generator.getLabelsForUser();
+        return GeneratorMap.getLabelsForUser();
     }
 }

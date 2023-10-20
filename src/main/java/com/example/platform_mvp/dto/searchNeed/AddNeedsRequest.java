@@ -12,6 +12,8 @@ import java.math.BigDecimal;
 public class AddNeedsRequest {
     @NotBlank(message = "username must not be blank!")
     String username;
+    @NotBlank(message = "number must not be blank!")
+    String number;
     @NotBlank(message = "searchLabels must not be blank!")
     String searchLabels;
     @Positive(message = "price must be positive")

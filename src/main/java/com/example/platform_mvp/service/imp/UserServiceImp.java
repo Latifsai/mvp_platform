@@ -5,10 +5,12 @@ import com.example.platform_mvp.dto.service.ServiceResponse;
 import com.example.platform_mvp.dto.user.RegistrationUserRequest;
 import com.example.platform_mvp.dto.user.UpdateUserRequest;
 import com.example.platform_mvp.dto.user.UserResponseForUsers;
+import com.example.platform_mvp.entities.SearchNeed;
 import com.example.platform_mvp.entities.Service;
 import com.example.platform_mvp.entities.User;
 import com.example.platform_mvp.entities.enums.Reputation;
 import com.example.platform_mvp.repository.UserRepository;
+import com.example.platform_mvp.service.SearchNeedService;
 import com.example.platform_mvp.service.UserService;
 import com.example.platform_mvp.service.utilites.ServiceUtil;
 import com.example.platform_mvp.service.utilites.UserUtil;
@@ -32,13 +34,21 @@ public class UserServiceImp implements UserService {
 
     private final ServiceUtil serviceUtil;
 
+    private final SearchNeedService searchNeedService;
+
     @Override
     public UserResponseForUsers registrateUser(RegistrationUserRequest request) {
         User user = util.createUserFromRequest(request, repository.findAll());
         Service service = serviceInterface.addServiceToUser(request.getServiceTitle(), request.getMaxPriceOfService(),
                 request.getMinPriceOfService(), request.getTypeOfService());
+        SearchNeed need = searchNeedService.addNeedsToUser(request.getLabels(), request.getPrice(), request.getExperience(),
+                request.getReputation(), user);
+
         service.setUser(user);
         user.setServices(List.of(service));
+        user.setSearchNeed(need);
+        need.setUser(user);
+
         repository.save(user);
         return util.convertToResponse(user, serviceUtil);
     }
@@ -151,9 +161,15 @@ public class UserServiceImp implements UserService {
                 serviceInterface.addServiceToUser(updatedService);
             }
         }
+
+        if (util.checkUpdateRequestForSearchNeed(request)) {
+             searchNeedService.updateNeeds(request,user);
+        }
+
         repository.save(updatedUser);
         return util.convertToResponse(updatedUser, serviceUtil);
     }
+
 
     @Override
     public void deleteUserByUserName(String username) {

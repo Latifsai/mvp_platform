@@ -3,8 +3,10 @@ package com.example.platform_mvp.service.utilites;
 import com.example.platform_mvp.dto.searchNeed.AddNeedsRequest;
 import com.example.platform_mvp.dto.searchNeed.SearchNeedsResponse;
 import com.example.platform_mvp.dto.searchNeed.UpdateNeedsRequest;
+import com.example.platform_mvp.dto.user.UpdateUserRequest;
 import com.example.platform_mvp.entities.SearchNeed;
-import com.example.platform_mvp.service.utilites.generator.Generator;
+import com.example.platform_mvp.entities.enums.Reputation;
+import com.example.platform_mvp.service.utilites.generator.GeneratorMap;
 import com.example.platform_mvp.validation.ExceptionMessage;
 import org.springframework.stereotype.Service;
 
@@ -14,25 +16,26 @@ import java.util.Set;
 @Service
 public class SearchNeedsUtil {
 
-    public SearchNeed createEntity(AddNeedsRequest request) {
+    public SearchNeed createEntity(String labels, BigDecimal price, Integer experience, Reputation reputation) {
         SearchNeed searchNeed = new SearchNeed();
 
         boolean match = getAllLabels().stream()
-                .anyMatch(label -> label.equalsIgnoreCase(request.getSearchLabels()));
+                .anyMatch(label -> label.equalsIgnoreCase(labels));
 
-            if (match) {
-                searchNeed.setSearchLabels(request.getSearchLabels());
-            }else {
-                throw new IllegalArgumentException(String.format(ExceptionMessage.INCORRECT_LABEL_MESSAGE,
-                        request.getSearchLabels(), getAllLabels().toString()));
-            }
+        if (match) {
+            searchNeed.setSearchLabels(labels);
+        } else {
+            throw new IllegalArgumentException(String.format(ExceptionMessage.INCORRECT_LABEL_MESSAGE,
+                    labels, getAllLabels().toString()));
+        }
 
-        searchNeed.setPrice(request.getPrice());
-        searchNeed.setExperience(request.getExperience());
-        searchNeed.setReputation(request.getReputation());
+        searchNeed.setPrice(price);
+        searchNeed.setExperience(experience);
+        searchNeed.setReputation(reputation);
         return searchNeed;
     }
 
+    @Deprecated
     public SearchNeedsResponse convertToResponse(SearchNeed need) {
         return SearchNeedsResponse.builder()
                 .searchLabels(need.getSearchLabels())
@@ -42,16 +45,19 @@ public class SearchNeedsUtil {
                 .build();
     }
 
-    public SearchNeed updateNeeds(SearchNeed need, UpdateNeedsRequest request) {
-        if (request.getSearchLabels() != null && !request.getSearchLabels().trim().isEmpty()) need.setSearchLabels(request.getSearchLabels());
-        if (request.getPrice() != null && !request.getPrice().equals(BigDecimal.ONE)) need.setPrice(request.getPrice());
-        if (request.getReputation() != null) need.setReputation(request.getReputation());
-        if (request.getExperience() !=null && request.getExperience() != 0) need.setExperience(request.getExperience());
+    public SearchNeed updateNeeds(SearchNeed need, UpdateUserRequest request) {
+        if (request.getLabels() != null && !request.getLabels().trim().isEmpty()) need.setSearchLabels(request.getLabels());
+
+        if (request.getWantedPrice() != null && !request.getWantedPrice().equals(BigDecimal.ONE)) need.setPrice(request.getWantedPrice());
+
+        if (request.getWandetReputation() != null) need.setReputation(request.getWandetReputation());
+
+        if (request.getWantedExperience() != null && request.getWantedExperience() != 0) need.setExperience(request.getExperience());
         return need;
     }
 
-
     public Set<String> getAllLabels() {
-        return Generator.getLabelsForUser().keySet();
+        return GeneratorMap.getLabelsForUser().keySet();
     }
+
 }

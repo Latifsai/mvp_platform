@@ -4,16 +4,21 @@ import com.example.platform_mvp.dto.service.ServiceResponse;
 import com.example.platform_mvp.dto.user.RegistrationUserRequest;
 import com.example.platform_mvp.dto.user.UpdateUserRequest;
 import com.example.platform_mvp.dto.user.UserResponseForUsers;
+import com.example.platform_mvp.entities.SearchNeed;
 import com.example.platform_mvp.entities.User;
 import com.example.platform_mvp.entities.enums.Reputation;
+import com.example.platform_mvp.service.utilites.generator.NumberGenerator;
 import com.example.platform_mvp.validation.ExceptionMessage;
 import com.example.platform_mvp.validation.exceptions.AlreadyExistException;
 import com.example.platform_mvp.validation.exceptions.FormatException;
 import com.example.platform_mvp.validation.exceptions.NotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,9 +27,8 @@ public class UserUtil {
 
     private final String usernameFormat = "^[A-Za-z]{3,20}[0-9]{2,5}$";
     private final String passwordFormat = "^[0-9]{6,20}[A-Za-z]{3,6}$";
-
+    private final Random random = new SecureRandom();
     private Matcher matcher;
-
 
     public User createUserFromRequest(RegistrationUserRequest request, List<User> allUsers) {
         User user = new User();
@@ -45,6 +49,7 @@ public class UserUtil {
             throw new AlreadyExistException(String.format(ExceptionMessage.ALREADY_EXIST_MESSAGE, request.getUsername()));
         }
 
+        user.setUniqueNumber(NumberGenerator.getInstance().generateNumber(random.nextInt(7, 16)));
         user.setFirstName(request.getFirstName());
         user.setSurname(request.getSurname());
 
@@ -89,6 +94,8 @@ public class UserUtil {
                 .map(serviceUtil::convertToResponse)
                 .toList();
 
+        SearchNeed need = user.getSearchNeed();
+
         return UserResponseForUsers.builder()
                 .username(user.getUsername())
                 .firstName(user.getFirstName())
@@ -98,6 +105,10 @@ public class UserUtil {
                 .informationAboutUser(user.getInformationAboutUser())
                 .reputation(user.getReputation())
                 .services(services)
+                .labels(need.getSearchLabels())
+                .wantedPrice(need.getPrice())
+                .wantedExperience(need.getExperience())
+                .wandetReputation(need.getReputation())
                 .build();
     }
 
@@ -124,8 +135,7 @@ public class UserUtil {
         if (checkCriteria(request.getUserInfo())) user.setInformationAboutUser(request.getUserInfo());
 
 
-
-        if (request.getExperience() > 0 && request.getExperience() != null) user.setExperience(request.getExperience());
+        if (request.getExperience() != null && request.getExperience() > 0) user.setExperience(request.getExperience());
         return user;
     }
 
@@ -151,6 +161,14 @@ public class UserUtil {
         services.stream()
                 .map(service -> service.getServiceTitle().equalsIgnoreCase(oldName))
                 .findAny()
-                .orElseThrow(() ->  new NotFoundException(String.format(ExceptionMessage.NOT_FOUND_SERVICE_MESSAGE, oldName)));
+                .orElseThrow(() -> new NotFoundException(String.format(ExceptionMessage.NOT_FOUND_SERVICE_MESSAGE, oldName)));
+    }
+
+    public boolean checkUpdateRequestForSearchNeed(UpdateUserRequest request) {
+        assert request != null;
+        return (request.getLabels() != null && !request.getLabels().trim().isEmpty())
+                || (request.getWantedPrice() != null && !request.getWantedPrice().equals(BigDecimal.ZERO))
+                || (request.getWantedExperience() != null && request.getWantedExperience() != 0)
+                || (request.getWandetReputation() != null);
     }
 }

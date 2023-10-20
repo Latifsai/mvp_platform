@@ -1,15 +1,16 @@
 package com.example.platform_mvp.entities;
 
 import com.example.platform_mvp.entities.enums.Reputation;
+import com.example.platform_mvp.entities.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 import static jakarta.persistence.CascadeType.*;
 
@@ -19,7 +20,7 @@ import static jakarta.persistence.CascadeType.*;
 @Table(name = "users")
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class User implements UserDetails {
 
     @Id
     @Column(name = "id", nullable = false, unique = true)
@@ -28,6 +29,9 @@ public class User {
 
     @Column(name = "username", nullable = false)
     private String username;
+
+    @Column(name = "unique_number", nullable = false)
+    private String uniqueNumber;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -53,6 +57,10 @@ public class User {
     @Column(name = "reputation", nullable = false)
     @Enumerated(EnumType.STRING)
     private Reputation reputation;
+
+    @Column(name = "role", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @OneToOne(mappedBy = "user", fetch = FetchType.EAGER, cascade = {REFRESH, PERSIST, REMOVE})
     private SearchNeed searchNeed;
@@ -100,5 +108,36 @@ public class User {
     public int hashCode() {
         return Objects.hash(id, username, firstName, password, surname, firmaTitle, experience, informationAboutUser,
                 credits, reputation, searchNeed, services);
+    }
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.singleton(role);
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

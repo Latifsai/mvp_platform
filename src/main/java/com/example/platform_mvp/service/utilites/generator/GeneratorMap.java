@@ -9,7 +9,7 @@ import java.util.Map;
 import static com.example.platform_mvp.entities.enums.TypeOfService.*;
 import static com.example.platform_mvp.entities.enums.TypeOfService.Cosmetic;
 
-public class Generator {
+public class GeneratorMap {
     public static Map<String, List<TypeOfService>> getLabelsForUser() {
         Map<String, List<TypeOfService>> map = new HashMap<>();
         map.put("#software", List.of(IT));

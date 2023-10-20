@@ -1,5 +1,6 @@
 package com.example.platform_mvp.dto.user;
 
+import com.example.platform_mvp.entities.enums.Reputation;
 import com.example.platform_mvp.entities.enums.TypeOfService;
 import lombok.Builder;
 import lombok.Value;
@@ -20,4 +21,8 @@ public class RegistrationUserRequest {
     BigDecimal maxPriceOfService;
     BigDecimal minPriceOfService;
     TypeOfService typeOfService;
+    String labels;
+    BigDecimal price;
+    Integer experienceOfUserToFind;
+    Reputation reputation;
 }

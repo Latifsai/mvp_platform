@@ -5,6 +5,7 @@ import com.example.platform_mvp.entities.enums.Reputation;
 import lombok.Builder;
 import lombok.Value;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Value
@@ -18,4 +19,9 @@ public class UserResponseForUsers {
     String informationAboutUser;
     Reputation reputation;
     List<ServiceResponse> services;
+    String labels;
+    BigDecimal wantedPrice;
+    Integer wantedExperience;
+    Reputation wandetReputation;
+
 }
