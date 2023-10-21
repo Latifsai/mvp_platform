@@ -21,9 +21,9 @@ import java.util.*;
 public class SearchUtil {
 
     public boolean checkSearchNeed(SearchNeed need) {
-        return (need.getSearchLabels() != null && !need.getSearchLabels().trim().isEmpty()) &&
-                (need.getExperience() != null && need.getExperience() != 0) &&
-                (need.getPrice() != null && !need.getPrice().equals(BigDecimal.ZERO))  &&
+        return (need.getSearchLabels() != null && !need.getSearchLabels().trim().isEmpty()) ||
+                (need.getExperience() != null && need.getExperience() != 0) ||
+                (need.getPrice() != null && !need.getPrice().equals(BigDecimal.ZERO))  ||
                 (need.getReputation() != null);
     }
 
@@ -42,7 +42,7 @@ public class SearchUtil {
     public List<User> filterByPrises(List<User> suitableUsers, SearchNeed need) {
         return suitableUsers.stream()
                 .filter(us -> us.getServices().stream()
-                        .anyMatch(service -> checkByPrice(service, need.getPrice())))
+                        .allMatch(service -> checkByPrice(service, need.getPrice())))
                 .toList();
     }
 
@@ -69,7 +69,7 @@ public class SearchUtil {
     }
 
     private BigDecimal getChanger(BigDecimal price) {
-        BigDecimal percent = new BigDecimal("0.25");
+        BigDecimal percent = new BigDecimal("0.5");
         return price.multiply(percent);
     }
 

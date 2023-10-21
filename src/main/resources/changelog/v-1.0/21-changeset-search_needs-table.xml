@@ -50,19 +50,19 @@
     <changeSet id="4.2" author="latif">
         <sql>
             INSERT INTO search_needs
-            VALUES (1, 4, '20', null, '#nails', UNHEX(REPLACE('00aeba1a-b777-48a9-8928-9955b8e156e7', '-', '')));
+            VALUES (1, '20', 4, null, '#nails', UNHEX(REPLACE('00aeba1a-b777-48a9-8928-9955b8e156e7', '-', '')));
 
             INSERT INTO search_needs
             VALUES (2, 2, null, null, '#cleaning', UNHEX(REPLACE('048882e0-6226-456f-ade3-508ed5d604e1', '-', '')));
 
             INSERT INTO search_needs
-            VALUES (3, 4, '15000', null, '#software', UNHEX(REPLACE('0984720e-b9ca-4038-b457-3c0aab3f78c8', '-', '')));
+            VALUES (3, '15000', 4, null, '#software', UNHEX(REPLACE('0984720e-b9ca-4038-b457-3c0aab3f78c8', '-', '')));
 
             INSERT INTO search_needs
             VALUES (4, 0, '0', null, '#kurs', UNHEX(REPLACE('160720d4-423a-4a57-8363-e05b6cdb1e6e', '-', '')));
 
             INSERT INTO search_needs
-            VALUES (5, 4, '15000', null, '#software', UNHEX(REPLACE('3e5facea-c6eb-4d9f-acbe-6d1d1769b834', '-', '')));
+            VALUES (5, '15000', 4, null, '#software', UNHEX(REPLACE('3e5facea-c6eb-4d9f-acbe-6d1d1769b834', '-', '')));
 
             -- User 'Ragnar'
             INSERT INTO search_needs
