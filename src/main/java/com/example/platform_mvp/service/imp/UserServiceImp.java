@@ -125,7 +125,7 @@ public class UserServiceImp implements UserService {
     @Override
     public List<UserResponseForUsers> findUsersByServiceTitleAndExperience(String serviceTitle, Integer experience) {
         List<User> userByExperience = util.filterUserByExperience(repository.findAll(), experience);
-        return filterUsersByService(userByExperience, serviceTitle).stream()
+        return util.findAllUsersWhichServiceTitleContainsCriteria(userByExperience, serviceTitle).stream()
                 .map(user -> util.convertToResponse(user, serviceUtil))
                 .toList();
     }

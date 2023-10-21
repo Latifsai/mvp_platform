@@ -1,0 +1,2 @@
+alter table search_needs drop index UK_spgtx6j4abyrtsuj1bps3tf22
+drop table search_needs;

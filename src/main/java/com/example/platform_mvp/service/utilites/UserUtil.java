@@ -117,7 +117,7 @@ public class UserUtil {
 
     public List<User> filterUserByExperience(List<User> allUsers, int years) {
         List<User> users = new ArrayList<>();
-        int changer = 3;
+        int changer = years / 2;
 
         for (User user : allUsers) {
             if (user.getExperience() >= years || user.getExperience() >= years + changer
