@@ -8,7 +8,6 @@ import com.example.platform_mvp.service.imp.UserServiceImp;
 import com.example.platform_mvp.service.utilites.SearchUtil;
 import com.example.platform_mvp.service.utilites.ServiceUtil;
 import com.example.platform_mvp.service.utilites.UserUtil;
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -30,16 +29,13 @@ public class SearchSuitableUsersService {
 
     private final ServiceUtil serviceUtil;
 
-    @PostConstruct
-    public void init() {
-        findSuitableUsers();
-    }
 
-    public List<UserResponseForUsers> findSuitableUsers() {
+    public List<UserResponseForUsers> findSuitableUsers(String username) {
         List<User> allUsers = userService.getAllUsers();
         List<User> suitableUsers = new ArrayList<>();
 
-        for (User user : allUsers) {
+        User user = userService.findByUsername(username);
+
             if (user.getSearchNeed() != null && util.checkSearchNeed(user.getSearchNeed())) {
                 List<SearchNeed> needs = new ArrayList<>();
                 needs.add(user.getSearchNeed());
@@ -69,10 +65,10 @@ public class SearchSuitableUsersService {
                     }
                 }
             }
-        }
+
         log.info(suitableUsers.toString());
         return suitableUsers.stream()
-                .map(user -> userUtil.convertToResponse(user, serviceUtil))
+                .map(u -> userUtil.convertToResponse(u, serviceUtil))
                 .toList();
     }
 }

@@ -2,6 +2,7 @@ package com.example.platform_mvp.controller;
 
 import com.example.platform_mvp.dto.auth.LoginRequest;
 import com.example.platform_mvp.dto.auth.LoginResponse;
+import com.example.platform_mvp.service.SearchSuitableUsersService;
 import com.example.platform_mvp.service.auth.JwtTokenProvider;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthenticationController {
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManager authenticationManager;
+    private final SearchSuitableUsersService searchSuitableUsersService;
 
     @PostMapping
     public ResponseEntity<LoginResponse> authenticateUser(@Valid @RequestBody LoginRequest request) {
@@ -34,6 +36,6 @@ public class AuthenticationController {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtTokenProvider.generateToken(authentication.getName());
-        return new ResponseEntity<>(new LoginResponse(jwt), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(new LoginResponse(jwt, searchSuitableUsersService.findSuitableUsers(request.getUsername())), HttpStatus.ACCEPTED);
     }
 }
