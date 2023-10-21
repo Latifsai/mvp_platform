@@ -26,54 +26,143 @@
     </changeSet>
 
 
-<!--    <changeSet id="insert" author="latif">-->
-<!--        <sql>-->
-<!--            INSERT INTO users-->
-<!--            VALUES (UNHEX(REPLACE('00aeba1a-b777-48a9-8928-9955b8e156e7', '-', '')), 'Lera Odos 21', 'pro_eilley@gmail.com', '1390.00', 'Eilley', '0.00', '+30 133 438 9087', '2023-08-29', '2870.00', 'Prodocous', '2023-08-29', '$2a$10$ruSCjhXF8i30nqNtvAeS0OSyzfF3vOR3Oiq6keZN.XLRgRw9ZvPCC', 1); &#45;&#45; 2125-->
-<!--            INSERT INTO users-->
-<!--            VALUES (UNHEX(REPLACE('048882e0-6226-456f-ade3-508ed5d604e1', '-', '')), 'Wormwood street A65', 'alice@gmail.com', '687.56', 'Alisa', '89.00', '+44 880 857 9353', '2022-10-17', '1800.00', 'Wellhouse', '2022-10-17', '$2a$10$U27TLD7XvgSMeTDxcn60xejTp7VWQY78oULxRs8yf10GUktGdEVV.', 1); &#45;&#45; 4444-->
-<!--            INSERT INTO users-->
-<!--            VALUES (UNHEX(REPLACE('0984720e-b9ca-4038-b457-3c0aab3f78c8', '-', '')), 'Via Casillina 65', 'raiden@iCloud.com', '2560.00', 'Raiden', '2250.00', '+39 333 546 8700', '2023-08-29', '4680.00', 'Thorson', '2023-08-29', '$2a$10$qyjer9Zza1XYFXDQDwVHjeFcTFZECwBnqpJJzzqNEP.9wi1A5Rr6y', 1); &#45;&#45; 5555-->
-<!--            INSERT INTO users-->
-<!--            VALUES (UNHEX(REPLACE('160720d4-423a-4a57-8363-e05b6cdb1e6e', '-', '')), '39th Ave', 'oliver@iCloud.com', '6000.00', 'Oliver', '35000.00', '+1 880 454 4981', '1989-01-12', '9800.00', 'Bisquit', '2012-09-17', '$2a$10$3Ksk9xUjg5uOTJb6IlHrduEYTzLI5HMQbOCAvPJZQLwvPqDC6jmjS', 1); &#45;&#45; 6666-->
-<!--            INSERT INTO users-->
-<!--            VALUES (UNHEX(REPLACE('3e5facea-c6eb-4d9f-acbe-6d1d1769b834', '-', '')), 'Karl Johans Street 12', 'svangar@iCloud.com', '10000.00', 'Sven', '10000.00', '+47 987 65 432', '2019-04-30', '35000.00', 'Jägnar', '2021-06-25', '$2a$10$Kx9C4fPKLlfp6OgOL9DwhOjdWHMMfd.WcCsJcUfXl6LJpyWnNkDtK', 1); &#45;&#45; 7777-->
-<!--            INSERT INTO users-->
-<!--            VALUES (UNHEX(REPLACE('4a4a540c-1e62-4026-a742-b402ebdd4214', '-', '')), 'Storgata pedestrian street 99', 'konung_ragnar@iCloud.com', '19600.00', 'Ragnar', '20000.00', '+47 880 85 935', '2017-06-29', '500000.00', 'Lothbrok', '2022-11-17', '$2a$10$O6nydX7evWG7uotLXYk7O.EEN5NHBS6V7X7oqUjxfsrB09ng.qA52', 1); &#45;&#45; 8888-->
-<!--            INSERT INTO users-->
-<!--            VALUES (UNHEX(REPLACE('5388f283-47b0-4a7e-a698-bd7150c35ab7', '-', '')), 'Argyle street 15', 'li_bruce@iCloud.com', '20000.00', 'Bruce', '22000.00', '+1 453 919 4321', '2013-10-11', '44000.00', 'Li', '2018-05-19', '$2a$10$tTx1lRlLkbEUKzSOTKNZKeCCjvtTKRipSAekqWfG6S.eBpLgrTNEi', 1); &#45;&#45; 9999-->
-<!--            INSERT INTO users-->
-<!--            VALUES (UNHEX(REPLACE('7095f6cf-1d3d-414f-800a-ba563b5ba6d5', '-', '')), 'Mendji street 34', 'brandon@mail.com', '2000.00', 'Brandon', '230.00', '+48 453 777 215', '2018-12-15', '6346.00', 'Mcgregor', '2022-07-28', '$2a$10$xOPCI0CeSMnIAnj5IZBKZus7jeqSkj4Ud20RmwiQnXF2ZjvkTEwN6', 1); &#45;&#45; 0000-->
-<!--            INSERT INTO users-->
-<!--            VALUES (UNHEX(REPLACE('906141bf-dfd4-47d2-815e-e29a0ef660fe', '-', '')), 'Gülveren Sk. 6', 'volodya@gmail.com', '30000.00', 'Vladimir', '10000.00', '+90 222 658 4328', '2015-07-01', '100000.00', 'Karpov', '2019-10-10', '$2a$10$qD85WBpSdMShcem3u2GEt.mOIH0b8NEXzofNSg286hS1HXm4hWh/m', 1); &#45;&#45; 1111-->
-<!--            INSERT INTO users-->
-<!--            VALUES (UNHEX(REPLACE('a3ca9f00-3886-46c9-b1c2-6af707c72c6c', '-', '')), '23th Street', 'hoch_luna@yahoo.org', '1979.00', 'Luna', '330.00', '+55 88 4548 6633', '2009-03-04', '4780.00', 'Hochberg', '2018-08-02', '$2a$10$ylgGqEMd9jDJEGAre00Bpe48x4yjYPFh8yBgI5QQiYcvCUPcievI2', 1); &#45;&#45; 2222-->
-<!--            INSERT INTO users-->
-<!--            VALUES (UNHEX(REPLACE('ab2b2e5f-3fbd-47bb-bb2b-b30e998bec27', '-', '')), 'Via Aversa 32', 'lalan@hushmail.com', '159760.00', 'Lalan', '1500.00', '+81 810 120 920', '2023-03-07', '342000.00', 'Andrellton', '2023-08-29', '$2a$10$uKjBMxrIb6r0RDICFrRlMeiBCs9eZmbC3a9vN6BA2NiEodnE0JKPO', 1); &#45;&#45; 2233-->
-<!--            INSERT INTO users-->
-<!--            VALUES (UNHEX(REPLACE('c2c05179-806e-42a4-8f30-1cf4d7711952', '-', '')), 'Winterfell street 245', 'j_snow@gmail.com', '1330.00', 'John', '300.00', '+44 880 857 9353', '2022-06-15', '2800.00', 'Stark', '2022-06-15', '$2a$10$Aij89YmKbCdVboYJfrRpFOTTCoFaMxHOJTYCZEKDzi77h/5iGYsnK', 1); &#45;&#45; 1212-->
-<!--            INSERT INTO users-->
-<!--            VALUES (UNHEX(REPLACE('caf07bfc-9de3-4b0b-800f-8d76fc332266', '-', '')), 'Mendji street 34', 'melli@gmail.com', '2760.00', 'Mellisa', '0.00', '+972 2 7772125', '2021-08-15', '12853.00', 'Greyshoe', '2022-03-29', '$2a$10$6.PD00dPROKuUwdGjtdyIejKtyrXVToOnbgA1kGljOryMRnmUMZOu', 1); &#45;&#45; 2888-->
-<!--            INSERT INTO users-->
-<!--            VALUES (UNHEX(REPLACE('e5b763ff-ee88-462a-94c6-4302bb6e8d99', '-', '')), 'Mosin Str 76','lev_lanister@mail.com', '1400.00', 'Lev', '100.00', '+49 167 31105233', '2019-10-18','2450.00', 'Lanister', '2019-10-18', '$2a$10$/dkE2n1qoohe6PXfnptmNOkbEj2aMXQTQ55xjGOx5N2NmOegnvs66', 1); &#45;&#45; 0505-->
-<!--            INSERT INTO users-->
-<!--            VALUES (UNHEX(REPLACE('ec5499c8-9bc1-4e87-a4a4-ee4ace2e001d', '-', '')), 'Mans Avenu 32', 'vitka@yahoo.org','12000.00', 'Vita', '0.00', '+66 800 020600', '2017-09-19', '25000.00', 'Kravchenko', '2023-08-29', '$2a$10$PC7iLWIQnUmfiYFtX77k4euluz/DQf85ZqeOvRUL8bjuoEAIm.A0i', 1); &#45;&#45; 3030-->
-<!--            INSERT INTO users-->
-<!--            VALUES (UNHEX(REPLACE('eda11578-10ae-4ec6-a1a9-c0bbdfe0e4c6', '-', '')), 'Lera Odos', 'eanna@mail.com','3076.00', 'Eanna', '1549.00', '+40 43 234 7648', '2023-01-01', '6572.00', 'Prodocous', '2023-01-01', '$2a$10$MEkijCa12/aFunl8ErlInekqFqMO5aRuTSdsnHqge.Qyj9fvcplLS', 1); &#45;&#45; 8090-->
+    <changeSet id="insert" author="latif">
+        <sql>
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('00aeba1a-b777-48a9-8928-9955b8e156e7', '-', '')), 69, 8, 'Incinga GmbH', 'Eilley', 'I am manager by Incinga, i present new products to clients', '$2a$10$ruSCjhXF8i30nqNtvAeS0OSyzfF3vOR3Oiq6keZN.XLRgRw9ZvPCC', 'Procodou', 'AB3J1JI4H', 'GOOD_SPECIALIST', 'USER', 'eilly432'); -- 2125
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('048882e0-6226-456f-ade3-508ed5d604e1', '-', '')), 58, 6, 'Leoni GmbH', 'Max', 'I am owner by Leoni GmbH', '$2a$10$U27TLD7XvgSMeTDxcn60xejTp7VWQY78oULxRs8yf10GUktGdEVV.', 'Smith', 'BK9J1LI4H', 'GOOD_SPECIALIST', 'USER', 'max555'); -- 4444
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('0984720e-b9ca-4038-b457-3c0aab3f78c8', '-', '')), 117, 12, 'Cesar GmbH', 'Stella', 'I am consult by Cesar GmbH, my services are consulting of clients', '$2a$10$qyjer9Zza1XYFXDQDwVHjeFcTFZECwBnqpJJzzqNEP.9wi1A5Rr6y', 'Like', 'PO09HUI4H', 'DIAMOND', 'USER', 'like225'); -- 5555
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('160720d4-423a-4a57-8363-e05b6cdb1e6e', '-', '')), 32, 4, 'Cesar GmbH', 'Manuel', 'I am developer by Cesar GmbH', '$2a$10$3Ksk9xUjg5uOTJb6IlHrduEYTzLI5HMQbOCAvPJZQLwvPqDC6jmjS', 'Colm', 'PO09FDG3423', 'GOOD_SPECIALIST', 'USER', 'manu3223'); -- 6666
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('3e5facea-c6eb-4d9f-acbe-6d1d1769b834', '-', '')), 90, 8, 'Dream Praxis', 'Alex', 'I am doctor by Dream Praxis', '$2a$10$Kx9C4fPKLlfp6OgOL9DwhOjdWHMMfd.WcCsJcUfXl6LJpyWnNkDtK', 'Beliy', 'SDBFY4334JNF', 'SENIOR', 'USER', 'alex456'); -- 7777
 
-<!--            &#45;&#45; managers-->
-<!--            INSERT INTO users-->
-<!--            VALUES (UNHEX(REPLACE('1adf0e65-73e5-4be2-86b4-92ca651aceb4', '-', '')), 'Wolf Street 32', 'beliy_manager@gmail.com', '1239.00', 'Oleg', '0.00', '+30 133 465 8080','2022-01-12','3000.00', 'Belov', '2022-01-12', '$2a$10$HMBqqCGQPIrC1fovM0Vgeu/a.ErVJ/WT1zuW/XIhxFm2XVnudLIDG', 2); &#45;&#45; 4242-->
-<!--            INSERT INTO users-->
-<!--            VALUES (UNHEX(REPLACE('35c3fe62-4279-4c21-a586-9ab31ee8348b','-','')), 'Longwater Street 43A', 'pol_Nikole_man@codopoliz.com', '1500.00', 'Nikole', '0.00', '+44 880 950 3333', '2019-05-17', '2870.00', 'Polenko', '2019-05-17', '$2a$10$Gno/J7CGlUCxXs37SyPr5ee7jOqkpAEhpUjBZ9.oEJ8AzXk5yXHqC', 2); &#45;&#45; 5454-->
-<!--            INSERT INTO users-->
-<!--            VALUES (UNHEX(REPLACE('56ada824-6e9b-4b6e-9054-e318639e232e','-','')), 'Ironside Street 100', 'thor_bjorn@iCloud.com', '40000.00', 'Bjorn', '0.00',  '+47 987 44 090', '2018-08-19', '2870.00', 'Halfthorsonn', '2018-08-19', '$2a$10$ngp3N2cuRFtZ4141e10eD.GMBHkXDF6P5Ss/gFoeidHcfbCkxwwTO', 2); &#45;&#45; 0099-->
-<!--            INSERT INTO users-->
-<!--            VALUES (UNHEX(REPLACE('59f85267-0e1d-4d2b-b9f9-cf61592ff186','-','')), 'La Avia 44', 'k_k@mail.com', '1000.00', 'Kirill', '0.00', '+39 333 404 7007', '2019-11-08', '2870.00', 'Krabzov', '2019-11-08', '$2a$10$s0aa4Twwbv4Er4ifUR1YdeCjPJHXxJtcI75u3lOQnlgEEtpG8k2tK', 2); &#45;&#45; 1234-->
-<!--            INSERT INTO users-->
-<!--            VALUES (UNHEX(REPLACE('60c46888-ed68-4925-a743-fae589a5c8ab','-','')),'7th Ave', 'nedd_snow_manager@mail.com', '2500.00', 'Nedd', '0.00', '+1 880 404 54803', '2020-03-12', '6890.00', 'Stark', '2020-03-12', '$2a$10$j/qCAut7vkmWTNw1FwjauOCGLJ9njBA/HPeo7a/i7Cm4917SX30fC', 2); &#45;&#45; 4567-->
-<!--        </sql>-->
-<!--    </changeSet>-->
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('4a4a540c-1e62-4026-a742-b402ebdd4214', '-', '')), 47, 5, 'Engel Praxis', 'Ragnar', 'I am orthopedist by Engel Praxis', '$2a$10$O6nydX7evWG7uotLXYk7O.EEN5NHBS6V7X7oqUjxfsrB09ng.qA52', 'Lothbrok', 'BV53BIU5H', 'GOOD_SPECIALIST', 'USER', 'ragnar456'); -- 8888
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('5388f283-47b0-4a7e-a698-bd7150c35ab7', '-', '')), 70, 8, 'Heart Hospital', 'Bruce', 'I am heart doctor by Heart Hospital', '$2a$10$tTx1lRlLkbEUKzSOTKNZKeCCjvtTKRipSAekqWfG6S.eBpLgrTNEi', 'Li', 'ER54MON78JN', 'SENIOR', 'USER', 'bruce236'); -- 9999
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('7095f6cf-1d3d-414f-800a-ba563b5ba6d5', '-', '')), 32, 3, 'Salon Viktoria', 'Brandon', 'I am barber', '$2a$10$xOPCI0CeSMnIAnj5IZBKZus7jeqSkj4Ud20RmwiQnXF2ZjvkTEwN6', 'Will', 'B453IU3213V', 'PRACTITIONER_BEGINNER', 'USER', 'will236'); -- 0000
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('906141bf-dfd4-47d2-815e-e29a0ef660fe', '-', '')), 18, 6, 'Salon Viktoria', 'Vladimir', 'I am barber', '$2a$10$qD85WBpSdMShcem3u2GEt.mOIH0b8NEXzofNSg286hS1HXm4hWh', 'Karpov', 'VH54UIH56', 'NO_TRUST', 'USER', 'vlad299'); -- 1111
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('a3ca9f00-3886-46c9-b1c2-6af707c72c6c', '-', '')), 48, 5, 'Tattosalon Style', 'Luna', 'I am tattomaster', '$2a$10$ylgGqEMd9jDJEGAre00Bpe48x4yjYPFh8yBgI5QQiYcvCUPcievI2', 'Hochberg', 'KB43UU43BI', 'GOOD_SPECIALIST', 'USER', 'luna259'); -- 2222
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('ab2b2e5f-3fbd-47bb-bb2b-b30e998bec27', '-', '')), 90, 7, '3th School', 'Lalan', 'I am teacher in school i can teach children', '$2a$10$uKjBMxrIb6r0RDICFrRlMeiBCs9eZmbC3a9vN6BA2NiEodnE0JKPO', 'Andrellton', 'GFV54U23V5V', 'SENIOR', 'USER', 'lula25986'); -- 2233
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('c2c05179-806e-42a4-8f30-1cf4d7711952', '-', '')), 200, 23, 'INGLEX', 'John', 'I am teacher in online school', '$2a$10$Aij89YmKbCdVboYJfrRpFOTTCoFaMxHOJTYCZEKDzi77h5iGYsnK', 'Stark', 'VH543JUB76', 'GOOD_SPECIALIST', 'USER', 'john432'); -- 1212
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('caf07bfc-9de3-4b0b-800f-8d76fc332266', '-', '')), 160, 19, 'INGLEX', 'Mellisa', 'I am teacher in online school', '$2a$10$6.PD00dPROKuUwdGjtdyIejKtyrXVToOnbgA1kGljOryMRnmUMZOu', 'Greyshoe', 'VH543JUB76', 'GOOD_SPECIALIST', 'USER', 'melli345'); -- 2888
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('e5b763ff-ee88-462a-94c6-4302bb6e8d99', '-', '')), 43, 14, 'Olimpus GmbH', 'Lev', 'I am owner if builders team', '$2a$10$/dkE2n1qoohe6PXfnptmNOkbEj2aMXQTQ55xjGOx5N2NmOegnvs66', 'Lanister',  'B543BI87IBVI', 'SENIOR', 'USER', 'lev749'); -- 0505
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('ec5499c8-9bc1-4e87-a4a4-ee4ace2e001d', '-', '')), 98, 8, 'M-Group', 'Vita', 'I am manger-consulting', '$2a$10$PC7iLWIQnUmfiYFtX77k4euluz/DQf85ZqeOvRUL8bjuoEAIm.A0i', 'Kravchenko', 'RY543OIQD655', 'SENIOR', 'USER', 'vita333'); -- 3030
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('eda11578-10ae-4ec6-a1a9-c0bbdfe0e4c6', '-', '')), 68, 6, 'F-Group', 'Eanna', 'I am manger-consulting', '$2a$10$MEkijCa12/aFunl8ErlInekqFqMO5aRuTSdsnHqge.Qyj9fvcplLS', 'Prodocous', 'QW546HF8809', 'GOOD_SPECIALIST', 'USER', 'eanna777'); -- 8090
+
+            -- legal
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('c3c943dc-9bad-4274-9788-a26ea737b8bd', '-', '')), 67, 6, 'Liamey Attorney', 'Liam', 'I am top attorney', '$2a$10$PC7iLWIQnUmfiYFtX77k4euluz/DQf85ZqeOvRUL8bjuoEAIm.A0i', 'Kim', 'QW349GFNK87', 'GOOD_SPECIALIST', 'USER', 'liam232'); -- 3030
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('8939efd3-c26d-47cb-9ca3-532adf6161f4', '-', '')), 90, 16, 'Attorney Service', 'Hoaking', 'I am top attorney', '$2a$10$MEkijCa12/aFunl8ErlInekqFqMO5aRuTSdsnHqge.Qyj9fvcplLS', 'Craft', '865JK3IUGYUGD23O', 'GOOD_SPECIALIST', 'USER', 'hoaki777'); -- 8090
+
+            -- accounting
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('924e48da-4744-4354-9193-203b06d78a44', '-', '')), 160, 19, 'Money GmbH', 'Lisa', 'I am accounting manager', '$2a$10$6.PD00dPROKuUwdGjtdyIejKtyrXVToOnbgA1kGljOryMRnmUMZOu', 'Harrington', '098HBJKV323VKX', 'DIAMOND', 'USER', 'lisa094'); -- 2888
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('69a7941d-84bf-47b6-a179-c4bf159bcbce', '-', '')), 43, 14, 'Binary Finance', 'Vitaly', 'I am owner of financial team', '$2a$10$/dkE2n1qoohe6PXfnptmNOkbEj2aMXQTQ55xjGOx5N2NmOegnvs66', 'Tichiy',  '084GFSDGIUG2234', 'GOOD_SPECIALIST', 'USER', 'vitay271'); -- 0505
+
+            -- IT
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('e3dd240e-61b0-4991-a87a-b72ee5f9836d', '-', '')), 90, 7, 'Solution Team', 'Ahra', 'developer in python', '$2a$10$uKjBMxrIb6r0RDICFrRlMeiBCs9eZmbC3a9vN6BA2NiEodnE0JKPO', 'Carrol', 'HI4343HUF23F', 'GOOD_SPECIALIST', 'USER', 'ahto0932'); -- 2233
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('e51b9d83-9565-470d-be31-a059eaeda890', '-', '')), 200, 23, 'Full Group', 'John', 'developer', '$2a$10$Aij89YmKbCdVboYJfrRpFOTTCoFaMxHOJTYCZEKDzi77h5iGYsnK', 'Stark', '21H34GBU5FU4G5', 'SENIOR', 'USER', 'john123'); -- 1212
+
+            -- Construction
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('443be38f-a640-4d63-be91-e35b6b0c6b53', '-', '')), 48, 5, 'Team Fakel', 'Lola', 'engineer', '$2a$10$ylgGqEMd9jDJEGAre00Bpe48x4yjYPFh8yBgI5QQiYcvCUPcievI2', 'Klein', 'UHI43998BFDS', 'GOOD_SPECIALIST', 'USER', 'sun259'); -- 2222
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('a608e2cc-23b7-4496-838c-544e4683aea9', '-', '')), 90, 7, 'Stone GmbH', 'Avraam', 'I am manager', '$2a$10$uKjBMxrIb6r0RDICFrRlMeiBCs9eZmbC3a9vN6BA2NiEodnE0JKPO', 'Harim', 'P432UUOI3VUGK', 'SENIOR', 'USER', 'avram324'); -- 2233
+
+            -- Housing_and_communal
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('ac38d4cc-a288-4f97-b2d1-4b844a8ed93d', '-', '')), 69, 8, 'Cleaner Group', 'Vim', 'I am owner of clean team', '$2a$10$ruSCjhXF8i30nqNtvAeS0OSyzfF3vOR3Oiq6keZN.XLRgRw9ZvPCC', 'Harumi', 'JUVB56Y78CF4G354KU', 'SENIOR', 'USER', 'vim654'); -- 2125
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('9f9f83ae-ee0f-4509-a871-c2b8b6adb7cc', '-', '')), 32, 4, 'Sauber GmbH', 'Fabian', 'I am owner of clean team', '$2a$10$3Ksk9xUjg5uOTJb6IlHrduEYTzLI5HMQbOCAvPJZQLwvPqDC6jmjS', 'Colm', 'YUG34543GIUVU76', 'SENIOR', 'USER', 'fabian344'); -- 6666
+
+            -- Trade
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('9f5ea9ac-9fe1-4da5-bafe-69746397de44', '-', '')), 32, 4, 'Wolf Group', 'Samuel', 'I am trader', '$2a$10$3Ksk9xUjg5uOTJb6IlHrduEYTzLI5HMQbOCAvPJZQLwvPqDC6jmjS', 'Mcgragor', 'IGH455VG665G756G5', 'PRACTITIONER_BEGINNER', 'USER', 'sam434'); -- 6666
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('a22b8d82-4ae5-43fc-ad1c-1f0eaa3f3c04', '-', '')), 90, 8, 'Drive GmbH', 'Alex', 'I am trader', '$2a$10$Kx9C4fPKLlfp6OgOL9DwhOjdWHMMfd.WcCsJcUfXl6LJpyWnNkDtK', 'White', 'YWGE345G45FUC67657', 'DIAMOND', 'USER', 'alex456'); -- 7777
+
+            -- finance
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('a8f20199-d7d9-4a30-bd2d-3bfa9ec7db8e', '-', '')), 32, 4, 'Dollar Group', 'Hann', 'I am finance-consulter', '$2a$10$3Ksk9xUjg5uOTJb6IlHrduEYTzLI5HMQbOCAvPJZQLwvPqDC6jmjS', 'Nurmag', '0BG544IH1234', 'DIAMOND', 'USER', 'hann434'); -- 6666
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('171bbea1-a258-48f5-959c-35ea8e6c5e11', '-', '')), 90, 8, 'AK', 'Alex', 'I am finance-consulter', '$2a$10$Kx9C4fPKLlfp6OgOL9DwhOjdWHMMfd.WcCsJcUfXl6LJpyWnNkDtK', 'Black', '934V556FGG5YH6O56', 'GOOD_SPECIALIST', 'USER', 'alex4654'); -- 7777
+
+            -- Cosmetic
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('8fd9bc56-2f27-4bb8-bdf6-17073360c11b', '-', '')), 32, 3, 'Salon Beauty', 'Lina', 'I am nail master', '$2a$10$xOPCI0CeSMnIAnj5IZBKZus7jeqSkj4Ud20RmwiQnXF2ZjvkTEwN6', 'Will', '48UGF5455U6U', 'SENIOR', 'USER', 'will228'); -- 0000
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('db8e51b1-6936-4676-accf-c2ea48b1751b', '-', '')), 87, 6, 'Self employed', 'Olga', 'I am lash master', '$2a$10$qD85WBpSdMShcem3u2GEt.mOIH0b8NEXzofNSg286hS1HXm4hWh', 'Karpova', '4989FGUYF65U', 'GOOD_SPECIALIST', 'USER', 'Oolga432'); -- 1111
+
+           -- Educational
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('782475b7-de7e-4f3c-b91f-ecafb955ba71', '-', '')), 70, 8, 'Wave It-School', 'Bruce', 'I teacher-developer', '$2a$10$tTx1lRlLkbEUKzSOTKNZKeCCjvtTKRipSAekqWfG6S.eBpLgrTNEi', 'Wane', 'ERNAK434552FSDF', 'SENIOR', 'USER', 'bruce346'); -- 9999
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('29357d6c-df07-4c27-b83b-8233de576a00', '-', '')), 32, 3, 'dEBody', 'Brandon', 'I am coach', '$2a$10$xOPCI0CeSMnIAnj5IZBKZus7jeqSkj4Ud20RmwiQnXF2ZjvkTEwN6', 'Havc', 'U45H4GRGO82WED', 'GOOD_SPECIALIST', 'USER', 'will234554'); -- 0000
+
+
+            -- Delivery
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('bb38b861-513a-4275-b51e-70efd79fdf8f', '-', '')), 48, 5, 'Germes Delivery Dom', 'Oliver', 'I am manager in logistic', '$2a$10$ylgGqEMd9jDJEGAre00Bpe48x4yjYPFh8yBgI5QQiYcvCUPcievI2', 'Zucker', 'ÖBI32443DFS34', 'SENIOR', 'USER', 'oliver545'); -- 2222
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('3da9bfb5-37f3-4477-aa48-3152715eddf8', '-', '')), 90, 7, 'Amazon', 'Olaf', 'I am manager in logistic', '$2a$10$uKjBMxrIb6r0RDICFrRlMeiBCs9eZmbC3a9vN6BA2NiEodnE0JKPO', 'Dark', 'IU3445UGVU9', 'PRACTITIONER_BEGINNER', 'USER', 'olaf343'); -- 2233
+
+            -- Security
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('462ba2cd-be79-48a8-a153-3b442a4f8aa2', '-', '')), 98, 8, 'Shield GmbH', 'Sam', 'I am manger-consulting', '$2a$10$PC7iLWIQnUmfiYFtX77k4euluz/DQf85ZqeOvRUL8bjuoEAIm.A0i', 'Levan', 'HV454VIUF133IU', 'SENIOR', 'USER', 'sam342'); -- 3030
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('f1676ab0-5cc1-4614-be08-dcfc43f705b2', '-', '')), 68, 6, 'F-Visor group', 'Max', 'I am manger-consulting', '$2a$10$MEkijCa12/aFunl8ErlInekqFqMO5aRuTSdsnHqge.Qyj9fvcplLS', 'Preparous', 'N98KV2334C3H4C', 'GOOD_SPECIALIST', 'USER', 'max494'); -- 8090
+
+            -- Tourist
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('846100ab-67b2-49a7-a9ff-600d443eee5b', '-', '')), 32, 4, 'Palm GmbH', 'Marc', 'I am consulter', '$2a$10$3Ksk9xUjg5uOTJb6IlHrduEYTzLI5HMQbOCAvPJZQLwvPqDC6jmjS', 'Colmy', 'UHILH54535IL45', 'GOOD_SPECIALIST', 'USER', 'marc323'); -- 6666
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('41b8f8d4-6be9-4ad3-a8a6-b719be09e428', '-', '')), 90, 8, 'Dream Travel', 'Pop', 'I am consulter', '$2a$10$Kx9C4fPKLlfp6OgOL9DwhOjdWHMMfd.WcCsJcUfXl6LJpyWnNkDtK', 'Ice', 'I4GIG56V35G4G', 'SENIOR', 'USER', 'ice434'); -- 7777
+
+            -- Entertainment_and_recreation
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('e0e67260-c784-48fe-bcab-227ada8577f7', '-', '')), 160, 19, 'Chill GmbH', 'Mellisa', 'I am a rehabilitologist', '$2a$10$6.PD00dPROKuUwdGjtdyIejKtyrXVToOnbgA1kGljOryMRnmUMZOu', 'Grey', 'II5454OIJPI24', 'GOOD_SPECIALIST', 'USER', 'melli233'); -- 2888
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('b4de5a35-26ed-4750-b63d-32f159819c65', '-', '')), 43, 14, 'Relax Salon', 'Leni', 'I am owner thai massage salon', '$2a$10$/dkE2n1qoohe6PXfnptmNOkbEj2aMXQTQ55xjGOx5N2NmOegnvs66', 'Lanister',  'POO4545H43O5H454', 'DIAMOND', 'USER', 'leni343'); -- 0505
+
+            -- Medical_and_sanatorium
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('a6200a56-01cc-4005-93d0-4ec87763e46d', '-', '')), 160, 19, 'Strongman team', 'Iskander', 'I am a leader of Strongman team', '$2a$10$6.PD00dPROKuUwdGjtdyIejKtyrXVToOnbgA1kGljOryMRnmUMZOu', 'Red', 'JIOH5445VGUV3', 'DIAMOND', 'USER', 'iskar455'); -- 2888
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('165e2b1a-f95f-400c-b994-13ef042bf83b', '-', '')), 43, 14, 'Rest GmbH', 'Lev', 'I am director Rest GmbH', '$2a$10$/dkE2n1qoohe6PXfnptmNOkbEj2aMXQTQ55xjGOx5N2NmOegnvs66', 'Lavin',  'IH4O5HHB56IOHV32', 'SENIOR', 'USER', 'lev7000'); -- 0505
+
+            -- admins
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('1adf0e65-73e5-4be2-86b4-92ca651aceb4', '-', '')), 100, 9, 'Platform', 'Oleg', 'admin', '$2a$10$HMBqqCGQPIrC1fovM0Vgeu/a.ErVJ/WT1zuW/XIhxFm2XVnudLIDG', 'Belov', 'OB43JB5490BHFD', 'SENIOR', 'ADMIN', 'oleg098'); -- 4242
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('35c3fe62-4279-4c21-a586-9ab31ee8348b','-','')), 76, 6, 'Platform', 'Nikole', 'admin', '$2a$10$Gno/J7CGlUCxXs37SyPr5ee7jOqkpAEhpUjBZ9.oEJ8AzXk5yXHqC', 'Half', 'QW43ND0R4JI34', 'GOOD_SPECIALIST', 'ADMIN', 'niko098'); -- 5454
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('56ada824-6e9b-4b6e-9054-e318639e232e','-','')), 65, 2, 'Platform', 'Bjorn', 'admin', '$2a$10$ngp3N2cuRFtZ4141e10eD.GMBHkXDF6P5Ss/gFoeidHcfbCkxwwTO', 'Halfthorsonn', 'MK321C342IU', 'PRACTITIONER_BEGINNER', 'ADMIN', 'bjorn000'); -- 0099
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('59f85267-0e1d-4d2b-b9f9-cf61592ff186','-','')), 45, 2, 'Platform', 'Kirill', 'admin', '$2a$10$s0aa4Twwbv4Er4ifUR1YdeCjPJHXxJtcI75u3lOQnlgEEtpG8k2tK', 'Krabzov', 'PONB344CU2TY', 'PRACTITIONER_BEGINNER', 'ADMIN', 'kirill123'); -- 1234
+            INSERT INTO users
+            VALUES (UNHEX(REPLACE('60c46888-ed68-4925-a743-fae589a5c8ab','-','')), 79, 5, 'Platform', 'Nedd', 'admin', '$2a$10$j/qCAut7vkmWTNw1FwjauOCGLJ9njBA/HPeo7a/i7Cm4917SX30fC', 'Stark', 'MK23CU43C32', 'DIAMOND', 'ADMIN', 'nedd123'); -- 4567
+
+
+
+        </sql>
+    </changeSet>
 
 
 </databaseChangeLog>

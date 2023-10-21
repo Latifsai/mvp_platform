@@ -145,6 +145,7 @@ public class UserUtil {
     public List<User> findAllUsersWhichServiceTitleContainsCriteria(List<User> users, String serviceTitle) {
         String firstWord = checkStringTitle(serviceTitle);
         return users.stream()
+                .filter(user -> !user.getInformationAboutUser().equalsIgnoreCase("admin"))
                 .filter(user -> user.getServices().stream()
                         .allMatch(service -> service.getServiceTitle().toLowerCase().contains(firstWord.toLowerCase())))
                 .toList();

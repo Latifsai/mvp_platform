@@ -47,73 +47,175 @@
     />
     </changeSet>
 
-<!--    <changeSet id="4.2" author="latif">-->
-<!--        <sql>-->
-<!--            INSERT INTO credit_histories-->
-<!--            VALUES (UNHEX(REPLACE('f3ad54a8-f9aa-4b72-a8ad-c4856c272e90', '-', '')), 'WELL',-->
-<!--                    UNHEX(REPLACE('0b8a9af4-9893-435d-a379-e18862324b91', '-', '')));-->
+    <changeSet id="4.2" author="latif">
+        <sql>
+            INSERT INTO search_needs
+            VALUES (1, 4, '20', null, '#nails', UNHEX(REPLACE('00aeba1a-b777-48a9-8928-9955b8e156e7', '-', '')));
 
-<!--            INSERT INTO credit_histories-->
-<!--            VALUES (UNHEX(REPLACE('452873d5-d043-4785-8a89-0c71593dd32f', '-', '')), 'WELL',-->
-<!--                    UNHEX(REPLACE('c6f3f18d-705b-4230-a200-925bfab7bf72', '-', '')));-->
+            INSERT INTO search_needs
+            VALUES (2, 2, null, null, '#cleaning', UNHEX(REPLACE('048882e0-6226-456f-ade3-508ed5d604e1', '-', '')));
 
-<!--            INSERT INTO credit_histories-->
-<!--            VALUES (UNHEX(REPLACE('4dfd183a-91b2-4c10-ba03-53f3c05b0c0c', '-', '')), 'WELL',-->
-<!--                    UNHEX(REPLACE('5343f0ca-2db4-43e0-83e2-168c28937c5e', '-', '')));-->
+            INSERT INTO search_needs
+            VALUES (3, 4, '15000', null, '#software', UNHEX(REPLACE('0984720e-b9ca-4038-b457-3c0aab3f78c8', '-', '')));
 
-<!--            INSERT INTO credit_histories-->
-<!--            VALUES (UNHEX(REPLACE('2845d823-d0cc-4308-8b62-bf6f123e7f26', '-', '')), 'WELL',-->
-<!--                    UNHEX(REPLACE('d56b5706-f5ea-40ad-9cf6-35f63f44e861', '-', '')));-->
+            INSERT INTO search_needs
+            VALUES (4, 0, '0', null, '#kurs', UNHEX(REPLACE('160720d4-423a-4a57-8363-e05b6cdb1e6e', '-', '')));
 
-<!--            INSERT INTO credit_histories-->
-<!--            VALUES (UNHEX(REPLACE('c8251aee-4b47-49c2-9c69-c8515b91b033', '-', '')), 'WELL',-->
-<!--                    UNHEX(REPLACE('d965437f-893f-422c-bbf4-ce7b3b7a7cd1', '-', '')));-->
+            INSERT INTO search_needs
+            VALUES (5, 4, '15000', null, '#software', UNHEX(REPLACE('3e5facea-c6eb-4d9f-acbe-6d1d1769b834', '-', '')));
 
-<!--            INSERT INTO credit_histories-->
-<!--            VALUES (UNHEX(REPLACE('1b634d7f-93b6-4719-aca6-3c4e3b1fca99', '-', '')), 'WELL',-->
-<!--                    UNHEX(REPLACE('bf6f91ea-28d0-4196-adc6-ab7c31d28b7e', '-', '')));-->
+            -- User 'Ragnar'
+            INSERT INTO search_needs
+            VALUES (6, 20000, 3, null, '#it', UNHEX(REPLACE('4a4a540c-1e62-4026-a742-b402ebdd4214', '-', '')));
 
-<!--            INSERT INTO credit_histories-->
-<!--            VALUES (UNHEX(REPLACE('cf81af72-4e11-452d-8e43-660f93842538', '-', '')), 'WELL',-->
-<!--                    UNHEX(REPLACE('21a93546-aacb-4182-b65e-e52867e359bb', '-', '')));-->
+            INSERT INTO search_needs
+            VALUES (7, 500, 0, 'GOOD_SPECIALIST', '#cleaning', UNHEX(REPLACE('5388f283-47b0-4a7e-a698-bd7150c35ab7', '-', '')));
 
-<!--            INSERT INTO credit_histories-->
-<!--            VALUES (UNHEX(REPLACE('112db565-5d24-432d-bfd9-8835a1c56b6b', '-', '')), 'WELL',-->
-<!--                    UNHEX(REPLACE('dd389062-99fa-444d-b08a-00013906a51e', '-', '')));-->
+            INSERT INTO search_needs
+            VALUES (8, 0, 4, 'GOOD_SPECIALIST', '#rules', UNHEX(REPLACE('7095f6cf-1d3d-414f-800a-ba563b5ba6d5', '-', '')));
 
-<!--            INSERT INTO credit_histories-->
-<!--            VALUES (UNHEX(REPLACE('da2021fe-7ef9-40bf-afe4-97d52db3a65f', '-', '')), 'WELL',-->
-<!--                    UNHEX(REPLACE('1fa2e55d-72ab-4546-b683-97079c1e1729', '-', '')));-->
+-- User 'Vladimir'
+            INSERT INTO search_needs
+            VALUES (9, 180, 3, null, '#cleaning', UNHEX(REPLACE('906141bf-dfd4-47d2-815e-e29a0ef660fe', '-', '')));
 
-<!--            INSERT INTO credit_histories-->
-<!--            VALUES (UNHEX(REPLACE('318039d4-b6ed-4816-b847-9fbe5a78f01b', '-', '')), 'WELL',-->
-<!--                    UNHEX(REPLACE('63ba5724-4e60-4271-970c-acc2b9e9d18b', '-', '')));-->
+-- User 'Luna'
+            INSERT INTO search_needs
+            VALUES (10, 50, 4, 'GOOD_SPECIALIST', '#kurs', UNHEX(REPLACE('a3ca9f00-3886-46c9-b1c2-6af707c72c6c', '-', '')));
+
+-- User 'Lalan'
+            INSERT INTO search_needs
+            VALUES (11, 500, 5, null, '#holiday', UNHEX(REPLACE('ab2b2e5f-3fbd-47bb-bb2b-b30e998bec27', '-', '')));
+
+-- User 'John'
+            INSERT INTO search_needs
+            VALUES (12, 10000, 5, null, '#rest', UNHEX(REPLACE('c2c05179-806e-42a4-8f30-1cf4d7711952', '-', '')));
+
+-- User 'Mellisa'
+            INSERT INTO search_needs
+            VALUES (13, 4000, 4, 'GOOD_SPECIALIST', '#beauty', UNHEX(REPLACE('caf07bfc-9de3-4b0b-800f-8d76fc332266', '-', '')));
+
+-- User 'Lev'
+            INSERT INTO search_needs
+            VALUES (14, 0, 0, null, null, UNHEX(REPLACE('e5b763ff-ee88-462a-94c6-4302bb6e8d99', '-', '')));
+
+-- User 'Vita'
+            INSERT INTO search_needs
+            VALUES (15, 0, 0, null, null, UNHEX(REPLACE('ec5499c8-9bc1-4e87-a4a4-ee4ace2e001d', '-', '')));
+
+-- User 'Eanna'
+            INSERT INTO search_needs
+            VALUES (16, 5000, 6, 'SENIOR', '#attorney', UNHEX(REPLACE('eda11578-10ae-4ec6-a1a9-c0bbdfe0e4c6', '-', '')));
+
+-- User 'Liam'
+            INSERT INTO search_needs
+            VALUES (17, 0, 0, null, null, UNHEX(REPLACE('c3c943dc-9bad-4274-9788-a26ea737b8bd', '-', '')));
+
+-- User 'Hoaking'
+            INSERT INTO search_needs
+            VALUES (18, 0, 0, null, null, UNHEX(REPLACE('8939efd3-c26d-47cb-9ca3-532adf6161f4', '-', '')));
+
+-- User 'Lisa'
+            INSERT INTO search_needs
+            VALUES (19, 2500, 0, null, '#holiday', UNHEX(REPLACE('924e48da-4744-4354-9193-203b06d78a44', '-', '')));
+
+-- User 'Vitaly'
+            INSERT INTO search_needs
+            VALUES (20, 300, 0,  'GOOD_SPECIALIST', '#cleaning', UNHEX(REPLACE('69a7941d-84bf-47b6-a179-c4bf159bcbce', '-', '')));
+
+-- User 'Ahra'
+            INSERT INTO search_needs
+            VALUES (21, 1000, 4, null, '#delivery', UNHEX(REPLACE('e3dd240e-61b0-4991-a87a-b72ee5f9836d', '-', '')));
+
+-- User 'John'
+            INSERT INTO search_needs
+            VALUES (22, 0, 0, 'GOOD_SPECIALIST', '#it', UNHEX(REPLACE('e51b9d83-9565-470d-be31-a059eaeda890', '-', '')));
+
+-- User 'Lola'
+            INSERT INTO search_needs
+            VALUES (23, 0, 0, null, '#security', UNHEX(REPLACE('443be38f-a640-4d63-be91-e35b6b0c6b53', '-', '')));
+
+-- User 'Avraam'
+            INSERT INTO search_needs
+            VALUES (24, 0, 4, null, '#cleaning', UNHEX(REPLACE('a608e2cc-23b7-4496-838c-544e4683aea9', '-', '')));
+
+-- User 'Vim'
+            INSERT INTO search_needs
+            VALUES (25, 0, 0, null, null, UNHEX(REPLACE('ac38d4cc-a288-4f97-b2d1-4b844a8ed93d', '-', '')));
+
+-- User 'Fabian'
+            INSERT INTO search_needs
+            VALUES (26, 0, 0, null, '#bank', UNHEX(REPLACE('9f9f83ae-ee0f-4509-a871-c2b8b6adb7cc', '-', '')));
+
+-- User 'Samuel'
+            INSERT INTO search_needs
+            VALUES (27, 0, 0, null, null, UNHEX(REPLACE('9f5ea9ac-9fe1-4da5-bafe-69746397de44', '-', '')));
+
+-- User 'Alex' (Finance)
+            INSERT INTO search_needs
+            VALUES (28, 0, 0, null, null, UNHEX(REPLACE('a22b8d82-4ae5-43fc-ad1c-1f0eaa3f3c04', '-', '')));
+
+-- User 'Hann' (Finance)
+            INSERT INTO search_needs
+            VALUES (29, 0, 0, null, null, UNHEX(REPLACE('a8f20199-d7d9-4a30-bd2d-3bfa9ec7db8e', '-', '')));
+
+-- User 'Lina' (Cosmetic)
+            INSERT INTO search_needs
+            VALUES (30, 0, 0, null, null, UNHEX(REPLACE('8fd9bc56-2f27-4bb8-bdf6-17073360c11b', '-', '')));
+
+-- User 'Olga' (Cosmetic)
+            INSERT INTO search_needs
+            VALUES (31, 32, 3, null, '#cosmetic', UNHEX(REPLACE('db8e51b1-6936-4676-accf-c2ea48b1751b', '-', '')));
+
+-- User 'Bruce' (Educational)
+            INSERT INTO search_needs
+            VALUES (32, 0, 0, null, null, UNHEX(REPLACE('782475b7-de7e-4f3c-b91f-ecafb955ba71', '-', '')));
+
+-- User 'Brandon' (Educational)
+            INSERT INTO search_needs
+            VALUES (33, 300, 3, 'GOOD_SPECIALIST', '#house', UNHEX(REPLACE('29357d6c-df07-4c27-b83b-8233de576a00', '-', '')));
+
+-- User 'Oliver' (Delivery)
+            INSERT INTO search_needs
+            VALUES (34, 0, 0, null, null, UNHEX(REPLACE('bb38b861-513a-4275-b51e-70efd79fdf8f', '-', '')));
+
+-- User 'Olaf' (Delivery)
+            INSERT INTO search_needs
+            VALUES (35, 0, 0, null, null, UNHEX(REPLACE('3da9bfb5-37f3-4477-aa48-3152715eddf8', '-', '')));
+
+-- User 'Sam' (Security)
+            INSERT INTO search_needs
+            VALUES (36, 0, 5, null, '#money', UNHEX(REPLACE('462ba2cd-be79-48a8-a153-3b442a4f8aa2', '-', '')));
+
+-- User 'Max' (Security)
+            INSERT INTO search_needs
+            VALUES (37, 3500, 4, null, '#software', UNHEX(REPLACE('f1676ab0-5cc1-4614-be08-dcfc43f705b2', '-', '')));
+
+-- User 'Marc' (Tourist)
+            INSERT INTO search_needs
+            VALUES (38, 2500, 5, 'GOOD_SPECIALIST', '#delivery', UNHEX(REPLACE('846100ab-67b2-49a7-a9ff-600d443eee5b', '-', '')));
+
+-- User 'Pop' (Tourist)
+            INSERT INTO search_needs
+            VALUES (39, 0, 4, null, '#healt', UNHEX(REPLACE('41b8f8d4-6be9-4ad3-a8a6-b719be09e428', '-', '')));
+
+-- User 'Mellisa' (Entertainment and Recreation)
+            INSERT INTO search_needs
+            VALUES (40, 0, 0, null, null, UNHEX(REPLACE('e0e67260-c784-48fe-bcab-227ada8577f7', '-', '')));
+
+-- User 'Leni' (Entertainment and Recreation)
+            INSERT INTO search_needs
+            VALUES (41, 0, 0, null, null, UNHEX(REPLACE('b4de5a35-26ed-4750-b63d-32f159819c65', '-', '')));
+
+-- User 'Iskander' (Medical and Sanatorium)
+            INSERT INTO search_needs
+            VALUES (42, 0, 0, null, null, UNHEX(REPLACE('a6200a56-01cc-4005-93d0-4ec87763e46d', '-', '')));
+
+-- User 'Lev' (Medical and Sanatorium)
+            INSERT INTO search_needs
+            VALUES (43, 0, 0, null, null, UNHEX(REPLACE('165e2b1a-f95f-400c-b994-13ef042bf83b', '-', '')));
 
 
-<!--            INSERT INTO credit_histories-->
-<!--            VALUES (UNHEX(REPLACE('a7776a10-48b0-431e-afc3-a512d0a88df3', '-', '')), 'WELL',-->
-<!--                    UNHEX(REPLACE('f53ee69d-c79d-4e97-8d90-1b964ca6be95', '-', '')));-->
-
-<!--            INSERT INTO credit_histories-->
-<!--            VALUES (UNHEX(REPLACE('eeecc8a5-346c-4361-9aec-6346f21c35c1', '-', '')), 'WELL',-->
-<!--                    UNHEX(REPLACE('33c02962-82ce-4ece-9642-5efbd55ba6c2', '-', '')));-->
-
-<!--            INSERT INTO credit_histories-->
-<!--            VALUES (UNHEX(REPLACE('a5081cb1-21f9-4118-9f1b-ba23f720d114', '-', '')), 'WELL',-->
-<!--                    UNHEX(REPLACE('5c644c79-b060-42b0-8c47-513e8e8e7535', '-', '')));-->
-
-<!--            INSERT INTO credit_histories-->
-<!--            VALUES (UNHEX(REPLACE('c9e34f00-31e2-4f7e-92ca-18443f6aceeb', '-', '')), 'WELL',-->
-<!--                    UNHEX(REPLACE('2d045a56-ea36-43e9-8b45-a1ea44c47044', '-', '')));-->
-
-<!--            INSERT INTO credit_histories-->
-<!--            VALUES (UNHEX(REPLACE('5e27b0b1-756f-470b-bc73-e74240eaf9b9', '-', '')), 'WELL',-->
-<!--                    UNHEX(REPLACE('7ec83125-7463-45bf-962e-58cb84ac2589', '-', '')));-->
-
-<!--            INSERT INTO credit_histories-->
-<!--            VALUES (UNHEX(REPLACE('ce84de6f-689b-4c6d-bdf1-d4be229d8597', '-', '')), 'WELL',-->
-<!--                    UNHEX(REPLACE('5b6e86c9-7f2e-437e-8a6b-a74b988fe72c', '-', '')));-->
-<!--        </sql>-->
-<!--    </changeSet>-->
+        </sql>
+    </changeSet>
 
 </databaseChangeLog>

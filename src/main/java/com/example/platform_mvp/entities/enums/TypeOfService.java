@@ -14,5 +14,6 @@ public enum TypeOfService {
     Security,
     Tourist,
     Entertainment_and_recreation,
-    Medical_and_sanatorium
+    Medical_and_sanatorium,
+    Service;
 }

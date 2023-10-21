@@ -202,7 +202,9 @@ public class UserServiceImp implements UserService {
     }
 
     private List<User> filterUsersByService(List<User> users, String service) {
+
         return users.stream()
+                .filter(user -> !user.getInformationAboutUser().equalsIgnoreCase("admin"))
                 .filter(user -> user.getServices().stream()
                         .anyMatch(ser -> ser.getTypeOfService().toString().equals(service)))
                 .toList();

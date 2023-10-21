@@ -1,12 +1,10 @@
 package com.example.platform_mvp.service.utilites;
 
-import com.example.platform_mvp.dto.searchNeed.AddNeedsRequest;
 import com.example.platform_mvp.dto.searchNeed.SearchNeedsResponse;
-import com.example.platform_mvp.dto.searchNeed.UpdateNeedsRequest;
 import com.example.platform_mvp.dto.user.UpdateUserRequest;
 import com.example.platform_mvp.entities.SearchNeed;
 import com.example.platform_mvp.entities.enums.Reputation;
-import com.example.platform_mvp.service.utilites.generator.GeneratorMap;
+import com.example.platform_mvp.service.utilites.generator.GeneratorOfLabels;
 import com.example.platform_mvp.validation.ExceptionMessage;
 import org.springframework.stereotype.Service;
 
@@ -57,7 +55,7 @@ public class SearchNeedsUtil {
     }
 
     public Set<String> getAllLabels() {
-        return GeneratorMap.getLabelsForUser().keySet();
+        return GeneratorOfLabels.getLabelsForUser().keySet();
     }
 
 }
