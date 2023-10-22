@@ -48,7 +48,7 @@ public class UserServiceImp implements UserService {
                 request.getMinPriceOfService(), request.getTypeOfService(), user);
 
         SearchNeed need = searchNeedService.addNeedsToUser(request.getLabels(), request.getPrice(), request.getExperienceOfUserToFind(),
-                request.getReputation(), user);
+                request.getReputationOfUserToFind(), user);
 
         user.setServices(List.of(service));
         user.setSearchNeed(need);

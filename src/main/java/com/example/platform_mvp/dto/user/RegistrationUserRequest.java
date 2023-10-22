@@ -2,6 +2,7 @@ package com.example.platform_mvp.dto.user;
 
 import com.example.platform_mvp.entities.enums.Reputation;
 import com.example.platform_mvp.entities.enums.TypeOfService;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Value;
@@ -17,20 +18,24 @@ public class RegistrationUserRequest {
     String firstName;
     @NotBlank(message = "surname must nto be null blank!")
     String surname;
-    @NotBlank(message = "password must nto be null blank!")
-    String password;
+    @Email
+    String email;
     @NotBlank(message = "firmaTitle must nto be null blank!")
     String firmaTitle;
     Integer experience;
     @NotBlank(message = "userInfo must nto be null blank!")
     String userInfo;
+
+    //to create service
     @NotBlank(message = "serviceTitle must nto be null blank!")
     String serviceTitle;
     BigDecimal maxPriceOfService;
     BigDecimal minPriceOfService;
     TypeOfService typeOfService;
+
+    // to create searchNeed
     String labels;
     BigDecimal price;
     Integer experienceOfUserToFind;
-    Reputation reputation;
+    Reputation reputationOfUserToFind;
 }

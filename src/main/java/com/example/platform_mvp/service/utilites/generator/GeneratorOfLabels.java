@@ -26,14 +26,14 @@ public class GeneratorOfLabels {
         map.put("#delivery", List.of(Delivery));
         map.put("#logistic", List.of(Delivery));
         map.put("#protect", List.of(Security));
-        map.put("#savety", List.of(Security));
+        map.put("#safety", List.of(Security));
         map.put("#security", List.of(Security));
         map.put("#fly",  List.of(Tourist));
         map.put("#holiday", List.of(Tourist));
         map.put("#regeneration", List.of(Entertainment_and_recreation, Medical_and_sanatorium));
         map.put("#rest", List.of(Entertainment_and_recreation, Medical_and_sanatorium));
-        map.put("#healt", List.of(Entertainment_and_recreation, Medical_and_sanatorium));
-        map.put("#medizine", List.of(Entertainment_and_recreation, Medical_and_sanatorium));
+        map.put("#health", List.of(Entertainment_and_recreation, Medical_and_sanatorium));
+        map.put("#medicine", List.of(Entertainment_and_recreation, Medical_and_sanatorium));
         map.put("#beauty",  List.of(Cosmetic));
         map.put("#nails", List.of(Cosmetic));
         return map;

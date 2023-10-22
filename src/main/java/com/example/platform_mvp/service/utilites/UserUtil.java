@@ -55,6 +55,8 @@ public class UserUtil {
         user.setFirstName(request.getFirstName());
         user.setSurname(request.getSurname());
 
+        user.setEmail(request.getEmail());
+
         checkField(passwordFormat, request.getPassword());
 
         if (matcher.find()) {

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search</title>
+</head>
+<body>
+<h1>Search</h1>
+
+<!-- Создаем кнопки для разных методов поиска -->
+<button id="searchBySkill">Search by skill</button>
+<button id="searchBySkillAndExperience">Search by skill and experience</button>
+<button id="searchBySkillAndReputation">Search by skill and reputation</button>
+<button id="searchByFirmaTitle">Search by firma</button>
+<button id="searchByServiceTitleAndExperience">Search by service title and experience</button>
+<button id="searchByServiceTitleAndReputation">Search by service title and reputation</button>
+<button id="searchByUsername">Search by username</button>
+
+
+<!-- Место для полей ввода параметров -->
+<div id="parameterInputs"></div>
+
+<!-- Описание метода поиска -->
+<div id="methodDescription"></div>
+
+<!-- Кнопка для выполнения поиска -->
+<button id="searchButton">Search</button>
+
+<!-- Результаты поиска -->
+<div id="searchResults"></div>
+
+<script>
+    const parameterInputs = document.getElementById("parameterInputs");
+    const methodDescription = document.getElementById("methodDescription");
+    const searchResults = document.getElementById("searchResults");
+    const searchButton = document.getElementById("searchButton");
+    const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ3aWxsMjM0NTU0IiwiaWF0IjoxNjk3OTExNjAwLCJleHAiOjE2OTc5MTUyMDB9.L3UG-btE2IIp9t5Y32ifD2NgJQ1j86eOod_TcBkqGTs";
+
+    // Функция для отображения полей ввода и описания метода поиска
+    function showSearchFields(method, description) {
+        parameterInputs.innerHTML = method;
+        methodDescription.innerHTML = description;
+    }
+
+    // Обработчики событий для кнопок
+    document.getElementById("searchBySkill").addEventListener("click", () => {
+        showSearchFields("Enter skill: <input type='text' id='skill'>", "Criteria of search: skill");
+    });
+
+    document.getElementById("searchBySkillAndExperience").addEventListener("click", () => {
+        showSearchFields("Enter skill: <input type='text' id='skill'><br>Enter experience: <input type='number' id='experience'>", "Criteria of search: skill and experience");
+    });
+
+    document.getElementById("searchBySkillAndReputation").addEventListener("click", () => {
+        showSearchFields("Enter skill: <input type='text' id='skill'><br>Enter reputation: <input type='text' id='reputation'>", "Criteria of search: skill and reputation");
+    });
+
+    document.getElementById("searchByFirmaTitle").addEventListener("click", () => {
+        showSearchFields("Enter title: <input type='text' id='title'>", "Criteria of search: firma`s name");
+    });
+
+    document.getElementById("searchByServiceTitleAndExperience").addEventListener("click", () => {
+        showSearchFields("Enter title of service: <input type='text' id='serviceTitle'><br>Enter experience: <input type='number' id='experience'>", "Criteria of search: service title and experience");
+    });
+
+    document.getElementById("searchByServiceTitleAndReputation").addEventListener("click", () => {
+        showSearchFields("Enter title of service: <input type='text' id='serviceTitle'><br>Enter reputation: <input type='text' id='reputation'>", "Criteria of search: service title and reputation");
+    });
+
+    document.getElementById("searchByUsername").addEventListener("click", () => {
+        showSearchFields("Enter username: <input type='text' id='username'>", "Criteria of search: username");
+    });
+
+    searchButton.addEventListener("click", () => {
+        const method = methodDescription.textContent;
+
+        if (method === "Criteria of search: skill") {
+            const skill = document.getElementById("skill").value;
+            // Создайте объект, который будет содержать данные для отправки на сервер
+            const url = `http://localhost:8181/api/users/skills/${skill}`;
+            fetch(url, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Обработка ответа от сервера
+                    // Вывод результатов поиска в searchResults
+                    searchResults.innerHTML = JSON.stringify(data);
+                })
+                .catch(error => {
+                    console.error("Произошла ошибка при выполнении поиска:", error);
+                    searchResults.innerHTML = "Error during the search";
+                });
+        } else if (method === "Criteria of search: skill and experience") {
+            const skill = document.getElementById("skill").value;
+            const experience = document.getElementById("experience").value;
+            fetch(`http://localhost:8181/api/users/skills_and_experience/${skill}/${experience}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    searchResults.innerHTML = JSON.stringify(data);
+                })
+                .catch(error => {
+                    console.error("Произошла ошибка при выполнении поиска:", error);
+                    searchResults.innerHTML = "Error during the search";
+                });
+        } else if (method === "Criteria of search: skill and reputation") {
+            const skill = document.getElementById("skill").value;
+            const reputation = document.getElementById("reputation").value;
+            fetch(`http://localhost:8181/api/users/skills_and_reputation/${skill}/${reputation}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Обработка ответа от сервера
+                    // Вывод результатов поиска в searchResults
+                    searchResults.innerHTML = JSON.stringify(data);
+                })
+                .catch(error => {
+                    console.error("Произошла ошибка при выполнении поиска:", error);
+                    searchResults.innerHTML = "Error during the search";
+                });
+        } else if (method === "Criteria of search: firma`s name") {
+            const title = document.getElementById("title").value;
+            fetch(`http://localhost:8181/api/users/firma_title/${title}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Обработка ответа от сервера
+                    // Вывод результатов поиска в searchResults
+                    searchResults.innerHTML = JSON.stringify(data);
+                })
+                .catch(error => {
+                    console.error("Произошла ошибка при выполнении поиска:", error);
+                    searchResults.innerHTML = "Error during the search";
+                });
+        } else if (method === "Criteria of search: service title and experience") {
+            const serviceTitle = document.getElementById("serviceTitle").value;
+            const experience = document.getElementById("experience").value;
+            fetch(`http://localhost:8181/api/users/service_title_and_experience/${serviceTitle}/${experience}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    searchResults.innerHTML = JSON.stringify(data);
+                })
+                .catch(error => {
+                    console.error("Произошла ошибка при выполнении поиска:", error);
+                    searchResults.innerHTML = "Error during the search";
+                });
+        } else if (method === "Criteria of search: service title and reputation") {
+            const serviceTitle = document.getElementById("serviceTitle").value;
+            const reputation = document.getElementById("reputation").value;
+            fetch(`http://localhost:8181/api/users/service_title_and_reputation/${serviceTitle}/${reputation}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Обработка ответа от сервера
+                    // Вывод результатов поиска в searchResults
+                    searchResults.innerHTML = JSON.stringify(data);
+                })
+                .catch(error => {
+                    console.error("Произошла ошибка при выполнении поиска:", error);
+                    searchResults.innerHTML = "Error during the search";
+                });
+        } else if (method === "Criteria of search: username") {
+            const username = document.getElementById("username").value;
+            fetch(`http://localhost:8181/api/users/services_user/${username}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    searchResults.innerHTML = JSON.stringify(data);
+                })
+                .catch(error => {
+                    console.error("Произошла ошибка при выполнении поиска:", error);
+                    searchResults.innerHTML = "Error during the search";
+                });
+        }
+
+
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            border: 1px solid #ffffff;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            width: 800px;
+        }
+
+        .column {
+            padding: 20px;
+            flex: 1;
+            width: 100%;
+        }
+
+        .left-column {
+            border-right: 1px solid #ccc;
+        }
+
+        h1 {
+            text-align: center;
+            font-family: 'Roboto', Arial, sans-serif;
+            font-size: 24px;
+            font-weight: 50;
+            line-height: 40px;
+            letter-spacing: 0;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .submit-button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 0;
+            cursor: pointer;
+            width: 20%;
+            margin-top: 0;
+        }
+
+    </style>
+</head>
+<body>
+<h1>Register</h1>
+<div class="container">
+    <div class="column left-column">
+        <form id="registration-form">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" name="firstName" required>
+            </div>
+            <div class="form-group">
+                <label for="surname">Surname:</label>
+                <input type="text" id="surname" name="surname" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="experience">Experience:</label>
+                <input type="number" id="experience" name="experience">
+            </div>
+            <div class="form-group">
+                <label for="firma">Firma:</label>
+                <input type="text" id="firma" name="firma" required>
+            </div>
+            <div class="form-group">
+                <label for="info">Information about you:</label>
+                <input type="text" id="info" name="info" required>
+            </div>
+            <div class="form-group">
+                <label for="service">Service name:</label>
+                <input type="text" id="service" name="service" required>
+            </div>
+        </form>
+    </div>
+
+    <div class="column">
+
+        <div class="form-group">
+            <label for="maxPrice">Max price of your service:</label>
+            <input type="text" id="maxPrice" name="maxPrice" required>
+        </div>
+
+        <div class="form-group">
+            <label for="minPrice">Min price of your service:</label>
+            <input type="text" id="minPrice" name="minPrice" required>
+        </div>
+
+        <div class="form-group">
+            <label for="typeOfService">TypeOfService:</label>
+            <select id="typeOfService" name="typeOfService">
+                <option value="Legal">Legal</option>
+                <option value="Accounting">Accounting</option>
+                <option value="IT">IT</option>
+                <option value="Construction">Construction</option>
+                <option value="Housing_and_communal">Housing_and_communal</option>
+                <option value="Trade">Trade</option>
+                <option value="Financial">Financial</option>
+                <option value="Cosmetic">Cosmetic</option>
+                <option value="Educational">Educational</option>
+                <option value="Delivery">Delivery</option>
+                <option value="Security">Security</option>
+                <option value="Tourist">Tourist</option>
+                <option value="Entertainment_and_recreation">Entertainment_and_recreation</option>
+                <option value="Medical_and_sanatorium">Medical_and_sanatorium</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="labels">Label to search:</label>
+            <select id="labels" name="labels">
+                <option value="#software">#software</option>
+                <option value="#it">#it</option>
+                <option value="#bank">#bank</option>
+                <option value="#money">#money</option>
+                <option value="#rules">#rules</option>
+                <option value="#attorney">#attorney</option>
+                <option value="#house">#house</option>
+                <option value="#cleaning">#cleaning</option>
+                <option value="#finance">#finance</option>
+                <option value="#kurs">#kurs</option>
+                <option value="#education">#education</option>
+                <option value="#delivery">#delivery</option>
+                <option value="#logistic">#logistic</option>
+                <option value="#protect">#protect</option>
+                <option value="#safety">#safety</option>
+                <option value="#security">#security</option>
+                <option value="#fly">#fly</option>
+                <option value="#holiday">#holiday</option>
+                <option value="#regeneration">#regeneration</option>
+                <option value="#rest">#rest</option>
+                <option value="#health">#health</option>
+                <option value="#medicine">#medicine</option>
+                <option value="#beauty">#beauty</option>
+                <option value="#nails">#nails</option>
+                <option value="null"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="price">desired price:</label>
+            <input type="text" id="price" name="price" required>
+        </div>
+
+        <div class="form-group">
+            <label for="experienceOfUserToFind">desired user experience:</label>
+            <input type="number" id="experienceOfUserToFind" name="experienceOfUserToFind">
+        </div>
+
+        <div class="form-group">
+            <label for="reputation">Desired reputation :</label>
+            <select id="reputation" name="reputation">
+                <option value="DIAMOND">DIAMOND</option>
+                <option value="SENIOR">SENIOR</option>
+                <option value="GOOD_SPECIALIST">GOOD_SPECIALIST</option>
+                <option value="PRACTITIONER_BEGINNER">PRACTITIONER_BEGINNER</option>
+                <option value="NO_TRUST">NO_TRUST</option>
+                <option value="null">Null</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+    <button class="submit-button" type="submit" id="register">Register</button>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const registerButton = document.getElementById("register");
+
+        registerButton.addEventListener("click", function(event) {
+            event.preventDefault(); // Prevent the default button click behavior
+
+            // Collect user input from the form
+            const username = document.getElementById("username").value;
+            const firstName = document.getElementById("firstName").value;
+            const surname = document.getElementById("surname").value;
+            const email = document.getElementById("email").value;
+            const experience = document.getElementById("experience").value;
+            const firma = document.getElementById("firma").value;
+            const info = document.getElementById("info").value;
+            const service = document.getElementById("service").value;
+            const maxPrice = document.getElementById("maxPrice").value;
+            const minPrice = document.getElementById("minPrice").value;
+            const typeOfService = document.getElementById("typeOfService").value;
+            const labels = document.getElementById("labels").value;
+            const price = document.getElementById("price").value;
+            const experienceOfUserToFind = document.getElementById("experienceOfUserToFind").value;
+            const reputation = document.getElementById("reputation").value;
+
+            const registrationData = {
+                username: username,
+                firstName: firstName,
+                surname: surname,
+                email: email,
+                experience: experience,
+                firmaTitle: firma,
+                userInfo: info,
+                serviceTitle: service,
+                maxPriceOfService: maxPrice,
+                minPriceOfService: minPrice,
+                typeOfService: typeOfService,
+                labels: labels,
+                price: price,
+                experienceOfUserToFind: experienceOfUserToFind,
+                reputationOfUserToFind: reputation
+            };
+
+            console.log(registrationData.service, registrationData.surname, registrationData.firma);
+            // Send a POST request to the server
+            fetch("http://localhost:8181/api/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(registrationData)
+            })
+                .then(response => {
+                    if (response.status === 201) {
+                        alert("Registration successful!");
+                    } else {
+                        alert("Registration failed. Please try again.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("Registration failed. Please try again.");
+                });
+        });
+    });
+</script>
+
+</body>
+</html>
+
