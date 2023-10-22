@@ -41,14 +41,17 @@ public class UserServiceImp implements UserService {
 
     @Override
     public UserResponseForUsers registrateUser(RegistrationUserRequest request) {
-        User user = util.createUserFromRequest(request, repository.findAll(), passwordEncoder);
+        User user = util.createUserFromRequest(request, repository.findAll());
+        String password = util.getPassword();
+        user.setPassword(passwordEncoder.encode(password));
+//        gMailer.sendMail("Invite message", user.getEmail(), user.getFirstName(), user.getUsername(), password);
         repository.save(user);
 
         Service service = serviceInterface.addServiceToUser(request.getServiceTitle(), request.getMaxPriceOfService(),
                 request.getMinPriceOfService(), request.getTypeOfService(), user);
 
-        SearchNeed need = searchNeedService.addNeedsToUser(request.getLabels(), request.getPrice(), request.getExperienceOfUserToFind(),
-                request.getReputationOfUserToFind(), user);
+        SearchNeed need = searchNeedService.addNeedsToUser(request.getLabels(), request.getPrice(),
+                request.getExperienceOfUserToFind(), request.getReputationOfUserToFind(), user);
 
         user.setServices(List.of(service));
         user.setSearchNeed(need);

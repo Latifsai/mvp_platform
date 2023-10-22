@@ -9,11 +9,11 @@ import com.example.platform_mvp.entities.User;
 import com.example.platform_mvp.entities.enums.Reputation;
 import com.example.platform_mvp.entities.enums.Role;
 import com.example.platform_mvp.service.utilites.generator.NumberGenerator;
+import com.example.platform_mvp.service.utilites.generator.PasswordGenerator;
 import com.example.platform_mvp.validation.ExceptionMessage;
 import com.example.platform_mvp.validation.exceptions.AlreadyExistException;
 import com.example.platform_mvp.validation.exceptions.FormatException;
 import com.example.platform_mvp.validation.exceptions.NotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -28,11 +28,11 @@ import java.util.regex.Pattern;
 public class UserUtil {
 
     private final String usernameFormat = "^[A-Za-z]{3,20}[0-9]{2,5}$";
-    private final String passwordFormat = "^[0-9]{6,20}[A-Za-z]{3,6}$";
+    private final String passwordFormat = "^[0-9A-Za-z]{6,20}$";
     private final Random random = new SecureRandom();
     private Matcher matcher;
 
-    public User createUserFromRequest(RegistrationUserRequest request, List<User> allUsers, PasswordEncoder encoder) {
+    public User createUserFromRequest(RegistrationUserRequest request, List<User> allUsers) {
         User user = new User();
 
         List<String> usernames = allUsers.stream()
@@ -56,14 +56,6 @@ public class UserUtil {
         user.setSurname(request.getSurname());
 
         user.setEmail(request.getEmail());
-
-        checkField(passwordFormat, request.getPassword());
-
-        if (matcher.find()) {
-            user.setPassword(encoder.encode(request.getPassword()));
-        } else {
-            throw new FormatException(String.format(ExceptionMessage.INCORRECT_PASSWORD_FORMAT_MESSAGE, request.getPassword()));
-        }
         user.setExperience(request.getExperience());
         user.setInformationAboutUser(request.getUserInfo());
         user.setFirmaTitle(request.getFirmaTitle());
@@ -86,6 +78,16 @@ public class UserUtil {
         } else if (years >= 1) {
             user.setCredits(23);
             user.setReputation(Reputation.PRACTITIONER_BEGINNER);
+        }
+    }
+
+    public String getPassword() {
+        String password = PasswordGenerator.generateNumber();
+        checkField(passwordFormat, password);
+        if (matcher.find()) {
+            return password;
+        } else {
+            throw new FormatException(String.format(ExceptionMessage.INCORRECT_PASSWORD_FORMAT_MESSAGE, password));
         }
     }
 
