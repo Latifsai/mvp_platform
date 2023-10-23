@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">X</span>
+        <h2>Result of search upon your needs</h2>
+        <p>Surname: <span id="surname1"></span></p>
+        <p>Firstname: <span id="name"></span></p>
+        <p>FirmaTitle: <span id="firma"></span></p>
+        <p>Reputation: <span id="status"></span></p>
+        <p>Experience: <span id="experience"></span></p>
+        <p>Contact data: <span id="email"></span></p>
+        <p>Service title: <span id="title"></span></p>
+        <p>max price: <span id="max"></span></p>
+        <p>min price: <span id="min"></span></p>
+        <button>to user</button>
+    </div>
+
+</div>
+
+<script>
+    const modal = document.getElementById('modal');
+    const closeBtn = document.querySelector('.close-btn');
+    modal.style.top = '0';
+
+    modal.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    })
+
+    const usersJSON = localStorage.getItem('users');
+    console.log("users: " +  usersJSON);
+    if (usersJSON) {
+        const usersData = JSON.parse(usersJSON);
+        const userList = usersData.users;
+        console.log("list: ", userList);
+        userList.forEach(user => {
+            console.log('Username:', user.username);
+            document.getElementById('surname1').textContent = user.surname;
+            document.getElementById('name').textContent = user.firstName;
+            document.getElementById('firma').textContent = user.firmaTitle;
+            document.getElementById('status').textContent = user.reputation;
+            document.getElementById('experience').textContent = user.experience;
+            document.getElementById('email').textContent = user.email;
+            document.getElementById('title').textContent = user.services[0].serviceTitle;
+            document.getElementById('max').textContent = user.services[0].maxPrice;
+            document.getElementById('min').textContent = user.services[0].minPrice;
+        });
+    }
+
+
+</script>
+
+<script>
+    const token = localStorage.getItem('token');
+    const username = localStorage.getItem('username');
+    console.error("token and json" + token, username)
+    if (username && token) {
+        fetch(`http://localhost:8181/api/users/username/${username}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+        })
+
+            .then(response => {
+                return response.json();
+            })
+            .then(jsonData => {
+                console.error(jsonData);
+                document.getElementById("us").textContent = jsonData.username;
+                document.getElementById('userEmail').textContent = jsonData.email;
+                document.getElementById('uniqueNumber').textContent = jsonData.uniqueNumber || ""; // Проверка на наличие uniqueNumber
+                document.getElementById('surname').textContent = jsonData.surname;
+                document.getElementById('firmaTitle').textContent = jsonData.firmaTitle;
+                document.getElementById('credits').textContent = jsonData.credits || ""; // Проверка на наличие credits
+                document.getElementById('reputation').textContent = jsonData.reputation;
+                document.getElementById('informationAboutUser').textContent = jsonData.informationAboutUser;
+                if (jsonData.services.length > 0) {
+                    const service = jsonData.services[0]; // Assuming there's only one service in the array
+                    document.getElementById('serviceTitle').textContent = service.serviceTitle;
+                    document.getElementById('maxPrice').textContent = service.maxPrice;
+                    document.getElementById('minPrice').textContent = service.minPrice;
+                    document.getElementById('typeOfService').textContent = service.typeOfService;
+                } else {
+                    document.getElementById('serviceTitle').textContent = "";
+                    document.getElementById('maxPrice').textContent = "";
+                    document.getElementById('minPrice').textContent = "";
+                    document.getElementById('typeOfService').textContent = "";
+                }
+                document.getElementById('labels').value = jsonData.labels || "";
+                document.getElementById('price').value = jsonData.wantedPrice || "";
+                document.getElementById('experienceOfUserToFind').value = jsonData.wantedExperience || "";
+                document.getElementById('reput').value = jsonData.wandetReputation || ""
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            })
+    }
+</script>
+
+<div class="profile-header">
+    <h1 style="color: #0074d9; margin-right: 1015px">Personal Info</h1>
+    <div class="header-line"></div>
+</div>
+
+<div class="profile-content">
+    <div class="profile-info">
+        <h2>User Info</h2>
+        <p>Username: <span id="us"></span></p>
+        <p>Email: <span id="userEmail">email</span></p>
+        <p>Number: <span id="uniqueNumber">uniqueNumber</span></p>
+        <p>Surname: <span id="surname">surname</span></p>
+        <p>FirmaTitle: <span id="firmaTitle">firmaTitle</span></p>
+        <p>Credits: <span id="credits">credits</span></p>
+        <p>Reputation: <span id="reputation">Reputation</span></p>
+        <p>info: <span id="informationAboutUser">info</span></p>
+    </div>
+
+    <div class="service-info">
+        <h2>Service</h2>
+        <p>Service title: <span id="serviceTitle">serviceTitle</span></p>
+        <p>max price: <span id="maxPrice">maxPrice</span></p>
+        <p>min price: <span id="minPrice">minPrice</span></p>
+        <p>Type: <span id="typeOfService">typeOfService</span></p>
+    </div>
+</div>
+
+<div class="bottom-content">
+    <h2>Search</h2>
+    <div class="form-group">
+        <label for="labels">Label to search:</label>
+        <select id="labels" name="labels">
+            <option value="#software">#software</option>
+            <option value="#it">#it</option>
+            <option value="#bank">#bank</option>
+            <option value="#money">#money</option>
+            <option value="#rules">#rules</option>
+            <option value="#attorney">#attorney</option>
+            <option value="#house">#house</option>
+            <option value="#cleaning">#cleaning</option>
+            <option value="#finance">#finance</option>
+            <option value="#kurs">#kurs</option>
+            <option value="#education">#education</option>
+            <option value="#delivery">#delivery</option>
+            <option value="#logistic">#logistic</option>
+            <option value="#protect">#protect</option>
+            <option value="#safety">#safety</option>
+            <option value="#security">#security</option>
+            <option value="#fly">#fly</option>
+            <option value="#holiday">#holiday</option>
+            <option value="#regeneration">#regeneration</option>
+            <option value="#rest">#rest</option>
+            <option value="#health">#health</option>
+            <option value="#medicine">#medicine</option>
+            <option value="#beauty">#beauty</option>
+            <option value="#nails">#nails</option>
+            <option value="null"></option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="price">Desired price:</label>
+        <input type="text" id="price" name="price" required>
+    </div>
+
+    <div class="form-group">
+        <label for="experienceOfUserToFind">Desired user experience:</label>
+        <input type="number" id="experienceOfUserToFind" name="experienceOfUserToFind">
+    </div>
+
+    <div class="form-group">
+        <label for="reput">Desired reputation:</label>
+        <select id="reput" name="reputation">
+            <option value="DIAMOND">DIAMOND</option>
+            <option value="SENIOR">SENIOR</option>
+            <option value="GOOD_SPECIALIST">GOOD_SPECIALIST</option>
+            <option value="PRACTITIONER_BEGINNER">PRACTITIONER_BEGINNER</option>
+            <option value="NO_TRUST">NO_TRUST</option>
+            <option value="null">Null</option>
+        </select>
+    </div>
+
+    <button type="submit">search</button>
+</div>
+
+</body>
+</html>

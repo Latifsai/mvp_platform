@@ -60,6 +60,10 @@ public class UserServiceImp implements UserService {
         return util.convertToResponse(user, serviceUtil);
     }
 
+    public UserResponseForUsers searchByUsername(String username) {
+        return util.convertToResponse(findByUsername(username), serviceUtil);
+    }
+
     /**
      * @param service is a TypeService(enum)
      * @return response of all founded users by service
@@ -171,7 +175,7 @@ public class UserServiceImp implements UserService {
         }
 
         if (util.checkUpdateRequestForSearchNeed(request)) {
-             searchNeedService.updateNeeds(request,user);
+            searchNeedService.updateNeeds(request, user);
         }
 
         repository.save(updatedUser);

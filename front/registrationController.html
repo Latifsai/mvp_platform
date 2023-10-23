@@ -254,6 +254,7 @@
             })
                 .then(response => {
                     if (response.status === 201) {
+                        window.location.href = 'Auth.html';
                         alert("Registration successful!");
                     } else {
                         alert("Registration failed. Please try again.");

@@ -68,6 +68,9 @@ public class User implements UserDetails {
     @OneToOne(mappedBy = "user", fetch = FetchType.EAGER, cascade = {REFRESH, PERSIST, REMOVE})
     private SearchNeed searchNeed;
 
+    @OneToMany(mappedBy = "user", cascade = {PERSIST, REMOVE, REFRESH}, fetch = FetchType.EAGER)
+    private List<Service> services;
+
     @Override
     public String toString() {
         return "User{" +
@@ -86,8 +89,6 @@ public class User implements UserDetails {
                 '}';
     }
 
-    @OneToMany(mappedBy = "user", cascade = {PERSIST, REMOVE, REFRESH}, fetch = FetchType.EAGER)
-    private List<Service> services;
 
     @Override
     public boolean equals(Object o) {

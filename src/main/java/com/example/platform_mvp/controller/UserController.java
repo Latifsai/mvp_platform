@@ -77,6 +77,12 @@ public class UserController {
         return service.getAllServicesBelongsUser(username);
     }
 
+    @GetMapping("/username/{username}")
+    @ResponseStatus(HttpStatus.FOUND)
+    public UserResponseForUsers searchUsername(@PathVariable(name = "username") String username) {
+        return service.searchByUsername(username);
+    }
+
     @PutMapping
     @ResponseStatus(HttpStatus.CREATED)
     public UserResponseForUsers update(@RequestBody UpdateUserRequest request) {

@@ -17,6 +17,9 @@ public class UserResponseForUsers {
     String firmaTitle;
     Integer experience;
     String informationAboutUser;
+    String uniqueNumber;
+    Integer credits;
+    String email;
     Reputation reputation;
     List<ServiceResponse> services;
     String labels;

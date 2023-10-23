@@ -1,0 +1,83 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.login-container {
+    background-color: #ffffff;
+    text-align: center;
+    padding: 20px;
+    width: 300px;
+}
+
+h1 {
+    font-family: 'Roboto', Arial, sans-serif;
+    font-size: 38px;
+    font-weight: 50;
+    line-height: 80px;
+    letter-spacing: 0;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 26;
+    line-height: 17px;
+    letter-spacing: 0;
+    text-align: center;
+}
+
+label {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    display: block;
+    margin: 0 auto;
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 30px;
+    font-family: Arial, sans-serif;
+    cursor: pointer;
+}
+
+#result {
+    text-align: center;
+}
+
+.user-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-item strong {
+    font-weight: bold;
+}
+
+.user-item br {
+    margin-top: 5px;
+}
+
+
