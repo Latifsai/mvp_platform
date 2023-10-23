@@ -37,6 +37,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/api/register/**").permitAll()
                         .requestMatchers("/api/users/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                         .requestMatchers("/api/services/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                        .requestMatchers("/api/needs/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                         .anyRequest().hasAnyAuthority("ROLE_ADMIN"))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
