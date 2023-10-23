@@ -181,4 +181,58 @@ button:hover {
     color: #333;
 }
 
+/* Скрыть меню */
+.side-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: -250px; /* Чтобы меню было сдвинуто влево и скрыто */
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    transition: left 0.3s;
+}
 
+/* Стилизация пунктов меню */
+.side-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.side-menu ul li {
+    margin-bottom: 10px;
+}
+
+.side-menu a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.menu-container {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+}
+
+.menu-item {
+    display: inline;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.search-views {
+    display: flex;
+    justify-content: space-around;
+}
+
+.search-view {
+    display: none;
+}

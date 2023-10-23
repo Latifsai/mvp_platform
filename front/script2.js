@@ -8,6 +8,20 @@ modal.addEventListener('click', (event) => {
     }
 })
 
+document.addEventListener("DOMContentLoaded", function() {
+    const openMenuButton = document.getElementById("open-menu-button");
+    const sideMenu = document.getElementById("sideMenu");
+
+    openMenuButton.addEventListener("click", function() {
+        if (sideMenu.style.left === "0px" || sideMenu.style.left === "") {
+            sideMenu.style.left = "-250px"; // Скрываем меню
+        } else {
+            sideMenu.style.left = "0px"; // Показываем меню
+        }
+    });
+});
+
+
 const usersJSON = localStorage.getItem('users');
 console.log("users: " + usersJSON);
 if (usersJSON) {
@@ -25,10 +39,16 @@ if (usersJSON) {
     });
 }
 const profileButton = document.querySelector('button');
-profileButton.addEventListener('click', () => {
-    window.location.href = 'dataForVisitor.html'; // Замените 'URL_профиля_пользователя' на URL страницы профиля
-});
 
+document.addEventListener("DOMContentLoaded", function () {
+    const profileButton = document.getElementById("profile-button");
+
+    if (profileButton) {
+        profileButton.addEventListener("click", () => {
+            window.location.href = 'dataForVisitor.html';
+        });
+    }
+});
 
 const token = localStorage.getItem('token');
 const username = localStorage.getItem('username');
@@ -93,16 +113,42 @@ document.addEventListener("DOMContentLoaded", function () {
                 }).then(data => {
                     console.log(data);
                     localStorage.setItem("UserByNeeds", JSON.stringify(data))
+                    window.location.href = 'ListOfUsers.html';
                 }).catch(error => {
                     console.error('Error:', error);
                 });
             }
-            window.location.href = 'ListOfUsers.html';
         });
 
     }
 
+})
+
+document.addEventListener("DOMContentLoaded", function () {
+    const menuItems = document.querySelectorAll(".menu-item");
+    const searchViews = document.querySelectorAll(".search-view");
+
+    menuItems.forEach((item) => {
+        item.addEventListener("click", () => {
+            const viewName = item.getAttribute("data-view");
+            searchViews.forEach((view) => {
+                view.style.display = "none";
+            });
+            document.getElementById(viewName).style.display = "block";
+        });
+    });
+
+
+    menuItems.forEach((menuItem) => {
+        menuItem.addEventListener("click", function () {
+            const view = menuItem.getAttribute("data-view");
+            // Здесь вы можете использовать значение "view" для навигации или других действий
+            console.log("Selected view:", view);
+
+            if (view === 'view1') {
+                window.location.href = 'SkillsSearch.html';
+            }
+        });
+
+    });
 });
-
-
-

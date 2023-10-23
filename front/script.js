@@ -1,9 +1,9 @@
 
-let email;
 document.addEventListener("DOMContentLoaded", function () {
-
+    let email;
+    let link;
     const usersJSON = localStorage.getItem('users');
-    console.log("users: " +  usersJSON);
+    console.log("users: " + usersJSON);
     const userNameHeader = document.getElementById("userNameHeader");
 
     if (usersJSON) {
@@ -20,10 +20,12 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("maxPrice").textContent = user.services[0].maxPrice;
             document.getElementById("minPrice").textContent = user.services[0].minPrice;
             document.getElementById("typeOfService").textContent = user.services[0].typeOfService;
-        email = user.email;
+            email = user.email;
+            link = user.photo;
         });
     }
-    // Добавление и удаление фотографий
+    userImage.src = link;
+
     const photoInput = document.getElementById("photoInput");
     const addPhotoButton = document.getElementById("addPhotoButton");
     const photoList = document.getElementById("photoList");
@@ -52,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-document.getElementById('getEmailButton').addEventListener('click', function() {
+document.getElementById('getEmailButton').addEventListener('click', function () {
     var gmailLink = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + email;
     window.open(gmailLink);
 });

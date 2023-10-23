@@ -5,6 +5,25 @@
 </head>
 <body>
 
+<div class="menu-container">
+    <ul class="menu">
+        <li class="menu-item" data-view="view1">By Skills</li>
+        <li class="menu-item" data-view="view2">By skills and experience</li>
+        <li class="menu-item" data-view="view3">Вид 3</li>
+    </ul>
+</div>
+
+<div class="search-views">
+    <div class="search-view" id="view1">
+    </div>
+    <div class="search-view" id="view2">
+    </div>
+    <div class="search-view" id="view3">
+    </div>
+</div>
+
+
+
 <div id="modal" class="modal">
     <div class="modal-content">
         <span class="close-btn">X</span>
@@ -15,7 +34,7 @@
         <p>Contact data: <span id="email"></span></p>
         <p>max price: <span id="max"></span></p>
         <p>min price: <span id="min"></span></p>
-        <button>profile</button>
+        <button id="profile-button">profile</button>
     </div>
 
 </div>
@@ -104,6 +123,7 @@
 
     <button type="submit" id="butt">search</button>
 </div>
+
 
 <script src="script2.js"></script>
 </body>
