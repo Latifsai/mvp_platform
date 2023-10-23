@@ -20,6 +20,7 @@ public class UserResponseForUsers {
     String uniqueNumber;
     Integer credits;
     String email;
+    String photo;
     Reputation reputation;
     List<ServiceResponse> services;
     String labels;

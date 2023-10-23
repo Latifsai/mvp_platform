@@ -77,19 +77,32 @@ if (username && token) {
         })
 }
 
-$(document).ready(function () {
-    $("#butt").click(function () {
-        if (username && token) {
-            fetch(`http://localhost:8181/api/needs/${username}`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                },
-            }).then(response => {
-                    console.log(JSON.stringify(response))
+document.addEventListener("DOMContentLoaded", function () {
+    const button = document.getElementById("butt");
+
+    if (button) {
+        button.addEventListener("click", function () {
+            if (username && token) {
+                fetch(`http://localhost:8181/api/needs/${username}`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    },
+                }).then(response => {
                     return response.json();
-                })
-        }
-    })
-})
+                }).then(data => {
+                    console.log(data);
+                    localStorage.setItem("UserByNeeds", JSON.stringify(data))
+                }).catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+            window.location.href = 'ListOfUsers.html';
+        });
+
+    }
+
+});
+
+
 

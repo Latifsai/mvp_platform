@@ -113,6 +113,7 @@ public class UserUtil {
                 .reputation(user.getReputation())
                 .services(services)
                 .email(user.getEmail())
+                .photo(user.getPhoto())
                 .credits(user.getCredits())
                 .uniqueNumber(user.getUniqueNumber())
                 .labels(need.getSearchLabels())

@@ -61,6 +61,9 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Reputation reputation;
 
+    @Column(name = "photo", nullable = false)
+    private String photo;
+
     @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;

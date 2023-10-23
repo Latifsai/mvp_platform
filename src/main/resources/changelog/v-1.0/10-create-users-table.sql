@@ -13,5 +13,6 @@ create table users
     role                   enum ('ADMIN','USER') not null,
     username               varchar(255) not null,
     email                  varchar(255) not null,
+    photo                  varchar(600) not null,
     primary key (id)
 ) engine=InnoDB
