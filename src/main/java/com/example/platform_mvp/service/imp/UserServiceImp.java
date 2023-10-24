@@ -10,6 +10,7 @@ import com.example.platform_mvp.entities.Service;
 import com.example.platform_mvp.entities.User;
 import com.example.platform_mvp.entities.enums.Reputation;
 import com.example.platform_mvp.repository.UserRepository;
+import com.example.platform_mvp.service.GMailer;
 import com.example.platform_mvp.service.SearchNeedService;
 import com.example.platform_mvp.service.UserService;
 import com.example.platform_mvp.service.utilites.ServiceUtil;
@@ -39,12 +40,16 @@ public class UserServiceImp implements UserService {
 
     private final PasswordEncoder passwordEncoder;
 
+    private final GMailer gMailer;
+
     @Override
     public UserResponseForUsers registrateUser(RegistrationUserRequest request) {
         User user = util.createUserFromRequest(request, repository.findAll());
         String password = util.getPassword();
         user.setPassword(passwordEncoder.encode(password));
-//        gMailer.sendMail("Invite message", user.getEmail(), user.getFirstName(), user.getUsername(), password);
+        gMailer.sendMail("Invite message", user.getEmail(), user.getFirstName(), user.getUsername(), password);
+
+        user.setPhoto("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROliboE48ewE7c1ysaJ-ejMSkQ8UFxt3qEvw&usqp=CAU");
         repository.save(user);
 
         Service service = serviceInterface.addServiceToUser(request.getServiceTitle(), request.getMaxPriceOfService(),
