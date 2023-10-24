@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8
+    container_name: 'mysql'
+    environment:
+      - MYSQL_ROOT_PASSWORD=50151832l
+      - MYSQL_DATABASE=platform_db
+    restart: always
+    ports:
+      - "3307:3306"
+
+
+  app:
+    depends_on:
+      - mysql
+    environment:
+     SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/credit_service
+     SPRING_DATASOURCE_USERNAME: root
+     SPRING_DATASOURCE_PASSWORD: 50151832l
+
+    build: ./
+    container_name: 'app'
+    ports:
+      - "8181:8181"
+    restart: always
