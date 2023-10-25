@@ -35,7 +35,7 @@ import static javax.mail.Message.RecipientType.TO;
 @Service
 public class GMailer {
 
-    private final String message = "Hello, %s\n. We are very pleased to welcome you to our Dream Driven client platform.\nImportant information!\n In this letter we will send you your passwordForUser to the platform, we kindly ask you not to disclose it to anyone\n\nusername: %s \n passwordForUser: %s";
+    private final String message = "Hello, %s. \n\nWe are very pleased to welcome you to our Dream Driven client platform.\nImportant information!\n In this letter we will send you your passwordForUser to the platform, we kindly ask you not to disclose it to anyone\n\nusername: %s \n passwordForUser: %s";
     private static final String SENDER = "saitbaevlatif@gmail.com";
     private final Gmail service;
 
@@ -52,14 +52,14 @@ public class GMailer {
 
         log.info("preparo for secreting");
 
-        GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(jsonFactory, new InputStreamReader(Objects.requireNonNull(GMailer.class.getResourceAsStream("/client_secret_1006062864802-fpajbp402u6ihag9on1ret5ircneo4pd.apps.googleusercontent.com.json"))));
+        GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(jsonFactory, new InputStreamReader(Objects.requireNonNull(GMailer.class.getResourceAsStream("/client_secret_1006062864802_fpajbp402u6ihag9on1ret5ircneo4pd_app.json"))));
 
         log.info("Secret if client" + clientSecrets.toPrettyString());
 
         GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
                 httpTransport, jsonFactory, clientSecrets, Set.of(GMAIL_SEND))
                 .setDataStoreFactory(new FileDataStoreFactory(Paths.get("tokens").toFile()))
-                .setAccessType("offline")
+                .setAccessType("online")
                 .build();
 
         LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8888).build();

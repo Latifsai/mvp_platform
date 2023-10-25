@@ -16,7 +16,7 @@ services:
     depends_on:
       - mysql
     environment:
-     SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/credit_service
+     SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/platform_db
      SPRING_DATASOURCE_USERNAME: root
      SPRING_DATASOURCE_PASSWORD: 50151832l
 
